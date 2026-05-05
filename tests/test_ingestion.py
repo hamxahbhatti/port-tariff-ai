@@ -58,12 +58,12 @@ def test_docling_parses():
     return result
 
 
-def test_vision_extracts(docling_result, max_pages: int = 3):
+def test_vision_extracts(docling_result, max_pages: int = 4):
     from ingestion.vision_extractor import extract_tables
 
     print("\n── Test 2: Gemini Vision extraction ────────────────────")
-    # Default: test first 3 table pages only to stay within free-tier quota.
-    # Run with max_pages=None for full extraction.
+    # Test first 4 table pages: pages 2,5,6 (light dues/VTS) + page 7 (pilotage
+    # with "Plus per 100T" incremental sub-rows). Run with max_pages=None for full run.
     pages = docling_result.table_pages[:max_pages] if max_pages else docling_result.table_pages
     print(f"  Testing {len(pages)} of {len(docling_result.table_pages)} table pages")
     vision_output = extract_tables(TARIFF_PDF, pages)
@@ -89,9 +89,17 @@ def test_vision_extracts(docling_result, max_pages: int = 3):
 def test_spot_check_values(vision_output):
     print("\n── Test 3: Spot-check known values ─────────────────────")
 
+    # Include tables from both confident AND flagged pages — flagged means
+    # the two passes slightly disagreed on formatting, not that values are wrong.
     all_tables = []
     for r in vision_output.results:
         all_tables.extend(r.tables)
+
+    if not all_tables:
+        print("  ⚠️  No tables extracted — check Vision errors above")
+        return
+
+    print(f"  Tables extracted: {[t.get('charge_type') for t in all_tables]}")
 
     # Check VTS Durban rate
     vts_tables = [t for t in all_tables if "vts" in t.get("charge_type", "").lower()]
@@ -104,33 +112,31 @@ def test_spot_check_values(vision_output):
             status = "✅" if match else "❌"
             print(f"  {status} VTS Durban: got {durban_vts}, expected {expected}")
         else:
-            print("  ⚠️  VTS Durban value not found in extracted data")
+            print("  ⚠️  VTS Durban value not found in extracted rows")
     else:
-        print("  ⚠️  VTS table not found")
+        print("  ⚠️  VTS table not found in tested pages")
 
-    # Check sub-row detection (is_incremental)
+    # Check sub-row detection (is_incremental) — only meaningful if pilotage/tug pages tested
     incremental_rows = [
-        row
-        for t in all_tables
+        row for t in all_tables
         for row in t.get("rows", [])
         if row.get("is_incremental")
     ]
-    status = "✅" if incremental_rows else "❌"
-    print(f"  {status} Incremental sub-rows detected: {len(incremental_rows)}")
-
-    # Check pilotage basic fee for Durban
-    pilot_tables = [
-        t for t in all_tables
-        if "pilotage" in t.get("charge_type", "").lower()
-    ]
+    pilot_tables = [t for t in all_tables if "pilotage" in t.get("charge_type", "").lower()]
     if pilot_tables:
+        status = "✅" if incremental_rows else "❌"
+        print(f"  {status} Incremental sub-rows detected: {len(incremental_rows)}")
+        # Check pilotage basic fee for Durban
         pilot_rows = pilot_tables[0].get("rows", [])
-        durban_basic = _find_value(pilot_rows, "durban")
+        non_incremental = [r for r in pilot_rows if not r.get("is_incremental")]
+        durban_basic = _find_value(non_incremental, "durban")
         if durban_basic:
             expected = KNOWN_VALUES["pilotage"]["durban_basic"]
             match = abs(float(durban_basic) - expected) < 1.0
             status = "✅" if match else "❌"
             print(f"  {status} Pilotage Durban basic: got {durban_basic}, expected {expected}")
+    else:
+        print("  ℹ️  Pilotage page not in test set — sub-row check deferred to full run")
 
 
 def _find_value(rows: list[dict], port: str):

@@ -194,7 +194,7 @@ def _double_pass_extract(
     )
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(min=5, max=30))
+@retry(stop=stop_after_attempt(3), wait=wait_exponential(min=10, max=60))
 def _call_vision(image_bytes: bytes, prompt: str) -> str:
     client = _get_client()
     response = client.models.generate_content(
