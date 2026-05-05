@@ -3,14 +3,20 @@ ChromaDB vector store for prose chunks and table descriptions.
 
 Used for semantic search: "what conditions apply to bulk carriers at Durban?"
 NOT for exact numeric lookups — use tariff_store.py for that.
+
+Uses a custom embedding function built on google.genai (new SDK) because
+ChromaDB's built-in GoogleGenerativeAiEmbeddingFunction still depends on
+the deprecated google.generativeai package which conflicts with our setup.
 """
 
 from __future__ import annotations
 
 import logging
+from typing import List
 
 import chromadb
-from chromadb.utils import embedding_functions
+from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
+from google import genai
 
 import config
 from ingestion.docling_parser import ProseChunk
@@ -21,20 +27,35 @@ _client: chromadb.PersistentClient | None = None
 _collection = None
 
 
+class GeminiEmbeddingFunction(EmbeddingFunction):
+    """Custom embedding function using google.genai (new SDK)."""
+
+    def __init__(self, api_key: str, model_name: str):
+        self._genai_client = genai.Client(api_key=api_key)
+        self._model = model_name
+
+    def __call__(self, input: Documents) -> Embeddings:
+        result = self._genai_client.models.embed_content(
+            model=self._model,
+            contents=list(input),
+        )
+        return [list(e.values) for e in result.embeddings]
+
+
 def _get_collection():
     global _client, _collection
 
     if _collection is None:
         _client = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
 
-        gemini_ef = embedding_functions.GoogleGenerativeAiEmbeddingFunction(
+        embedding_fn = GeminiEmbeddingFunction(
             api_key=config.GEMINI_API_KEY,
             model_name=config.GEMINI_EMBEDDING_MODEL,
         )
 
         _collection = _client.get_or_create_collection(
             name=config.CHROMA_COLLECTION_NAME,
-            embedding_function=gemini_ef,
+            embedding_function=embedding_fn,
             metadata={"hnsw:space": "cosine"},
         )
 
@@ -102,7 +123,6 @@ def query(
 ) -> list[dict]:
     """
     Semantic search over prose rules and table descriptions.
-
     Returns list of { text, metadata, distance }.
     """
     collection = _get_collection()

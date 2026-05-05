@@ -36,7 +36,7 @@ logger = logging.getLogger(__name__)
 
 _client: genai.Client | None = None
 
-TABLE_EXTRACTION_PROMPT = """You are a specialist in extracting structured data from port tariff documents.
+TABLE_EXTRACTION_PROMPT = """You are a specialist in extracting structured data from South African port tariff documents.
 
 Below is context text that another parser extracted from this page (may be incomplete):
 ---
@@ -48,35 +48,45 @@ Now look carefully at the page image.
 Extract ALL tables from this page as a JSON array. For each table use this exact schema:
 
 {{
-  "charge_type": "string (e.g. pilotage, tug_assistance, port_dues, vts, light_dues, cargo_dues, berthing, running_of_lines)",
+  "charge_type": "string (e.g. pilotage, tug_assistance, port_dues, vts, light_dues, cargo_dues, berthing, running_of_lines, berth_dues)",
   "section": "string (e.g. '3.3', '4.1')",
   "description": "string (natural language description of what this table covers)",
-  "ports_covered": ["list of port names as column headers"],
+  "table_orientation": "string — 'ports_as_columns' if port names are column headers, 'ports_as_rows' if each row is a different port",
+  "ports_covered": ["list of port names found in this table"],
   "rows": [
     {{
-      "tonnage_band": "string (e.g. '10000-50000', 'All vessels', 'Up to 2000')",
+      "port": "string — port name IF table_orientation is ports_as_rows, else null",
+      "tonnage_band": "string (e.g. '10000-50000', 'All vessels', 'Up to 2000') — null if row is a port-level rate",
       "is_incremental": false,
       "parent_band": null,
       "values": {{
         "durban": 38494.51,
-        "cape_town": 26938.00
+        "richards_bay": 39999.88,
+        "east_london": 27956.91,
+        "port_elizabeth": 35861.45,
+        "cape_town": 26938.00,
+        "saldanha": 44977.00
       }},
-      "unit": "string (e.g. 'per_100GT', 'per_GT', 'per_service', 'per_MT', 'per_24h')",
-      "notes": "string (any conditions or footnotes on this row)"
+      "unit": "string (e.g. 'per_100GT', 'per_GT', 'per_service', 'per_MT', 'per_24h', 'per_port_call')",
+      "notes": "string (any conditions or footnotes)"
     }}
   ],
-  "general_conditions": "string (any conditions that apply to the whole table)"
+  "general_conditions": "string (conditions applying to the whole table)"
 }}
 
 CRITICAL RULES:
-1. If a row starts with "Plus" or "plus per" or is visually indented below a tonnage band —
-   it is an INCREMENTAL sub-row. Set is_incremental=true and parent_band to the
-   tonnage band of the row directly above it.
-2. Preserve exact numeric values — do not round or estimate.
-3. Match each value to its correct port column — verify column headers carefully.
-4. If a cell says "on application" or "-", use null for that value.
+1. INCREMENTAL ROWS: If a row starts with "Plus" or "plus per" or is visually indented below
+   a tonnage band row — set is_incremental=true and parent_band to the tonnage band directly above.
+2. PORTS AS ROWS (e.g. VTS table): If each row represents one port (e.g. "Port of Durban — R0.65/GT"),
+   set table_orientation="ports_as_rows", set the "port" field on each row, and put the numeric
+   value under its port key in "values".
+3. PORTS AS COLUMNS (e.g. pilotage, tug tables): If ports are column headers and tonnage bands
+   are rows, set table_orientation="ports_as_columns", leave "port" as null on each row, and
+   map each column value to its port key in "values".
+4. Preserve exact numeric values — do not round or estimate.
 5. Port name keys in "values" must be lowercase with underscores (e.g. "richards_bay").
-6. Return ONLY valid JSON array. No markdown fences, no explanation text.
+6. If a cell says "on application" or "-", use null.
+7. Return ONLY valid JSON array. No markdown fences, no explanation.
 """
 
 
