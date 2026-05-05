@@ -8,9 +8,10 @@ Responsibilities:
 - If mismatch, flag the page for review
 - Docling's context text is included in the prompt to ground the VLM
 
-Rate limiting: free tier = 15 requests/min for gemini-2.0-flash.
+Rate limiting: gemini-2.5-flash free tier = 20 requests/min.
 With double-pass over N table pages = 2N requests.
-A 4-second inter-request delay keeps us safely within limits.
+A 7-second inter-request delay keeps us at ~8 req/min — well under the limit.
+On 429 errors, the API-provided retryDelay is respected automatically.
 """
 
 from __future__ import annotations
@@ -26,8 +27,8 @@ from pathlib import Path
 import fitz  # pymupdf
 from google import genai
 from google.genai import types
+from google.genai.errors import ClientError
 from PIL import Image
-from tenacity import retry, stop_after_attempt, wait_exponential
 
 import config
 from ingestion.docling_parser import TablePage
@@ -152,10 +153,10 @@ def extract_tables(
             )
             output.flagged_pages.append(page_no)
 
-        # Rate limit: free tier = 15 req/min. Double-pass = 2 calls per page.
-        # 4s gap keeps us at ~15 req/min across two passes.
+        # Rate limit: gemini-2.5-flash free tier = 20 req/min.
+        # 7s between pages keeps us at ~8 req/min — well under the limit.
         if idx < total - 1:
-            time.sleep(4)
+            time.sleep(7)
 
     pdf_doc.close()
 
@@ -186,7 +187,7 @@ def _double_pass_extract(
     )
 
     pass1_raw = _call_vision(image_bytes, prompt)
-    time.sleep(4)  # gap between the two passes
+    time.sleep(7)  # gap between the two passes
     pass2_raw = _call_vision(image_bytes, prompt)
 
     tables1 = _parse_json(pass1_raw)
@@ -204,17 +205,55 @@ def _double_pass_extract(
     )
 
 
-@retry(stop=stop_after_attempt(3), wait=wait_exponential(min=10, max=60))
-def _call_vision(image_bytes: bytes, prompt: str) -> str:
+def _call_vision(image_bytes: bytes, prompt: str, max_attempts: int = 3) -> str:
+    """
+    Call Gemini Vision with manual 429-aware retry.
+    google.genai already retries internally; we add one outer layer
+    that honours the retryDelay from the API response.
+    """
     client = _get_client()
-    response = client.models.generate_content(
-        model=config.GEMINI_VISION_MODEL,
-        contents=[
-            types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
-            prompt,
-        ],
-    )
-    return response.text.strip()
+    last_err: Exception | None = None
+
+    for attempt in range(max_attempts):
+        try:
+            response = client.models.generate_content(
+                model=config.GEMINI_VISION_MODEL,
+                contents=[
+                    types.Part.from_bytes(data=image_bytes, mime_type="image/png"),
+                    prompt,
+                ],
+            )
+            return response.text.strip()
+
+        except ClientError as e:
+            last_err = e
+            retry_delay = _parse_retry_delay(e)
+            wait = retry_delay + 5  # buffer on top of API-suggested delay
+            logger.warning(
+                f"Vision: ClientError on attempt {attempt+1}/{max_attempts} — "
+                f"status {e.status_code}, sleeping {wait:.0f}s"
+            )
+            time.sleep(wait)
+
+        except Exception as e:
+            last_err = e
+            logger.warning(f"Vision: unexpected error attempt {attempt+1}: {e}")
+            time.sleep(10)
+
+    raise RuntimeError(f"Vision failed after {max_attempts} attempts: {last_err}")
+
+
+def _parse_retry_delay(err: ClientError) -> float:
+    """Extract retryDelay seconds from a 429 ClientError response body."""
+    try:
+        details = err.args[1] if len(err.args) > 1 else {}
+        for detail in details.get("error", {}).get("details", []):
+            if "retryDelay" in detail:
+                delay_str = detail["retryDelay"]  # e.g. "34s"
+                return float(delay_str.rstrip("s"))
+    except Exception:
+        pass
+    return 30.0  # safe fallback
 
 
 def _parse_json(raw: str) -> list[dict]:
