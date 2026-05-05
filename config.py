@@ -13,8 +13,8 @@ CHROMA_DIR.mkdir(parents=True, exist_ok=True)
 # ── Gemini ─────────────────────────────────────────────────────────────────
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY", "")
 
-GEMINI_TEXT_MODEL = "gemini-2.0-flash"
-GEMINI_VISION_MODEL = "gemini-2.0-flash"
+GEMINI_TEXT_MODEL = "models/gemini-2.5-flash"
+GEMINI_VISION_MODEL = "models/gemini-2.5-flash"
 GEMINI_EMBEDDING_MODEL = "models/text-embedding-004"
 
 # ── Ingestion ──────────────────────────────────────────────────────────────

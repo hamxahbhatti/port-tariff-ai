@@ -26,7 +26,7 @@ def check_text():
     print("── Text call (1 request) ───────────────────────────────")
     client = genai.Client(api_key=API_KEY)
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="models/gemini-2.5-flash",
         contents=["Reply with exactly: KEY_OK"],
     )
     result = response.text.strip()
@@ -49,7 +49,7 @@ def check_vision():
     pdf_doc.close()
 
     response = client.models.generate_content(
-        model="gemini-2.0-flash",
+        model="models/gemini-2.5-flash",
         contents=[
             types.Part.from_bytes(data=buf.getvalue(), mime_type="image/png"),
             "What is the first charge type mentioned in this table? Reply in 5 words or less.",
