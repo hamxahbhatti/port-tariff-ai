@@ -231,7 +231,7 @@ def _call_vision(image_bytes: bytes, prompt: str, max_attempts: int = 3) -> str:
             wait = retry_delay + 5  # buffer on top of API-suggested delay
             logger.warning(
                 f"Vision: ClientError on attempt {attempt+1}/{max_attempts} — "
-                f"status {e.status_code}, sleeping {wait:.0f}s"
+                f"status {e.args[0] if e.args else 'unknown'}, sleeping {wait:.0f}s"
             )
             time.sleep(wait)
 
