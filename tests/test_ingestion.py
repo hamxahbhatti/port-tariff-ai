@@ -58,11 +58,15 @@ def test_docling_parses():
     return result
 
 
-def test_vision_extracts(docling_result):
+def test_vision_extracts(docling_result, max_pages: int = 3):
     from ingestion.vision_extractor import extract_tables
 
     print("\n── Test 2: Gemini Vision extraction ────────────────────")
-    vision_output = extract_tables(TARIFF_PDF, docling_result.table_pages)
+    # Default: test first 3 table pages only to stay within free-tier quota.
+    # Run with max_pages=None for full extraction.
+    pages = docling_result.table_pages[:max_pages] if max_pages else docling_result.table_pages
+    print(f"  Testing {len(pages)} of {len(docling_result.table_pages)} table pages")
+    vision_output = extract_tables(TARIFF_PDF, pages)
 
     assert len(vision_output.results) > 0, "No pages processed by Vision"
 

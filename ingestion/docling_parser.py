@@ -86,7 +86,9 @@ def parse(pdf_path: str | Path) -> DoclingResult:
         f"{len(pages_with_tables)} contain tables"
     )
 
-    # ── Extract prose chunks from non-table pages ──────────────────────────
+    # ── Extract prose chunks from ALL pages ───────────────────────────────
+    # Pages with tables also contain prose rules (conditions, surcharges).
+    # We extract prose from everywhere — VLM handles the numeric table data.
     current_heading = "General"
     current_text_parts: list[str] = []
     current_page = 0
@@ -95,12 +97,13 @@ def parse(pdf_path: str | Path) -> DoclingResult:
         prov = text_item.prov
         page_no = prov[0].page_no if prov else 0
 
-        if page_no in pages_with_tables:
+        # Skip items that are inside a table cell — VLM handles those
+        if _is_table_cell_text(text_item, doc):
             continue
 
-        label = getattr(text_item, "label", "").lower()
+        label = str(getattr(text_item, "label", "")).lower()
 
-        if "heading" in label or "title" in label:
+        if "heading" in label or "title" in label or "section" in label:
             if current_text_parts:
                 output.prose_chunks.append(
                     ProseChunk(
@@ -113,8 +116,10 @@ def parse(pdf_path: str | Path) -> DoclingResult:
             current_heading = text_item.text.strip()
             current_page = page_no
         else:
-            current_text_parts.append(text_item.text.strip())
-            current_page = page_no
+            text = text_item.text.strip()
+            if text:
+                current_text_parts.append(text)
+                current_page = page_no
 
     if current_text_parts:
         output.prose_chunks.append(
@@ -138,7 +143,8 @@ def parse(pdf_path: str | Path) -> DoclingResult:
             prov = table.prov
             if prov and any(p.page_no == page_no for p in prov):
                 try:
-                    context_parts.append(table.export_to_markdown())
+                    # Pass doc to avoid deprecation warning
+                    context_parts.append(table.export_to_markdown(doc=doc))
                 except Exception:
                     pass
 
@@ -168,3 +174,12 @@ def _count_pages(doc) -> int:
         return len(doc.pages)
     except Exception:
         return 0
+
+
+def _is_table_cell_text(text_item, doc) -> bool:
+    """Return True if this text item lives inside a table cell."""
+    try:
+        label = str(getattr(text_item, "label", "")).lower()
+        return "table" in label or "cell" in label
+    except Exception:
+        return False
