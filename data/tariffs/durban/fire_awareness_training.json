@@ -1,0 +1,104 @@
+{
+  "port": "durban",
+  "charge_type": "fire_awareness_training",
+  "section": "4.3.3",
+  "description": "Fire induction course per person per day",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1174.57
+      },
+      "unit": "per person per day",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 2352.07
+      },
+      "unit": "per person (2 days)",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1174.57
+      },
+      "unit": "per person (1 day)",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 2352.07
+      },
+      "unit": "per person (2 days)",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 3526.67
+      },
+      "unit": "per person (3 days)",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 270.26
+      },
+      "unit": "per drill/simulation",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 2352.07
+      },
+      "unit": "per person (2 days)",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 135.14
+      },
+      "unit": "per day",
+      "notes": null
+    }
+  ],
+  "general_conditions": "MEALS EXCLUDED",
+  "extraction_meta": {
+    "page_number": 14,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

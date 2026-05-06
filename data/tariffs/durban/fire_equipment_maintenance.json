@@ -1,0 +1,247 @@
+{
+  "port": "durban",
+  "charge_type": "fire_equipment_maintenance",
+  "section": "4.3.4",
+  "description": "Tariffs for fire equipment maintenance services.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 344.43
+      },
+      "unit": "per hour",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service of CO2 fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 376.8
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge of CO2 fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 376.8
+      },
+      "unit": "per recharge",
+      "notes": "Recharge of CO2 fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service of 9 kg powder fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 406.28
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge of 9 kg powder fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 376.8
+      },
+      "unit": "per recharge",
+      "notes": "Recharge of 9 kg powder fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service of 9 Lt water fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 203.11
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge of 9 Lt water fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per recharge",
+      "notes": "Recharge of 9 Lt water fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service of 9 Lt foam fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 220.76
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge of 9 Lt foam fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 188.37
+      },
+      "unit": "per recharge",
+      "notes": "Recharge of 9 Lt foam fire extinguisher"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 108.92
+      },
+      "unit": "per service",
+      "notes": "Service fire hose reel"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service and pressure test hose"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service mobile foam fire unit (>9 Lts capacity)"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 877.27
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge mobile foam fire unit"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 659.41
+      },
+      "unit": "per recharge",
+      "notes": "Recharge mobile foam fire unit (>9 Lts capacity)"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 173.68
+      },
+      "unit": "per service",
+      "notes": "Service mobile powder fire unit"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 877.27
+      },
+      "unit": "per service",
+      "notes": "Pressure test and recharge mobile powder fire unit (>9 kg capacity)"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 659.41
+      },
+      "unit": "per recharge",
+      "notes": "Recharge mobile powder fire unit (>9 kg capacity)"
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "port": "durban",
+  "charge_type": "fresh_water",
+  "section": "4.5",
+  "description": "Fees for the supply of fresh water.",
+  "ports_covered": [],
+  "rows": [],
+  "general_conditions": "Fees for the supply of fresh water are available on application.",
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

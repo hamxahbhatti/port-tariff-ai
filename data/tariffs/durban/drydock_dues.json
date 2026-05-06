@@ -1,0 +1,505 @@
+{
+  "port": "durban",
+  "charge_type": "drydock_dues",
+  "section": "6.6",
+  "description": "Drydock dues for use of a repair facility.",
+  "ports_covered": [
+    "cape_town",
+    "east_london",
+    "durban"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to 1 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 158.96,
+        "east_london": 158.96
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels from 1 001 up to 10 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 317.91,
+        "east_london": 317.91
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels from 10 001 up to 20 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 635.78,
+        "east_london": 635.78
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels from 20 001 up to 50 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 953.72,
+        "east_london": 953.72
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels above 50 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1271.56,
+        "east_london": 1271.56
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Drydock",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 13083.0
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Syncrolift",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 5771.23
+      },
+      "unit": "ZAR",
+      "notes": "Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "0 to 30 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 20796.71
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "0 to 30 000 tons",
+      "values": {
+        "durban": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "0 to 30 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 10398.34
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "30 001 to 60 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 43308.22
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "30 001 to 60 000 tons",
+      "values": {
+        "durban": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "30 001 to 60 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 21654.14
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "60 001 up to 80 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 51494.21
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "60 001 up to 80 000 tons",
+      "values": {
+        "durban": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "60 001 up to 80 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 25747.12
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof. Includes cranage and salt water during ordinary working hours. 'Tons shall mean gross tonnage in cubic metres'."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Sturrock and Prince Edward drydocks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 48570.64
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Sturrock and Prince Edward drydocks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 20389.12
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Princess Elizabeth and Robinson drydocks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 18634.97
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Princess Elizabeth and Robinson drydocks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 8329.37
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Floating docks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 20408.81
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Floating docks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 10204.4
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Syncrolift",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 6625.83
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Syncrolift",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 2206.74
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to 3 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 8585.2,
+        "east_london": 8585.2
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "Vessels up to 3 000 tons",
+      "values": {
+        "cape_town": 2.52,
+        "east_london": 2.52
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to 3 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 0.84,
+        "east_london": 0.84
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "3 001 to 6 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 11300.73,
+        "east_london": 11300.73
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "3 001 to 6 000 tons",
+      "values": {
+        "cape_town": 2.88,
+        "east_london": 2.88
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "3 001 to 6 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 0.94,
+        "east_london": 0.94
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "6 001 up to 10 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 19846.56,
+        "east_london": 19846.56
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "6 001 up to 10 000 tons",
+      "values": {
+        "cape_town": 3.53,
+        "east_london": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "6 001 up to 10 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1.39,
+        "east_london": 1.39
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "10 001 to 30 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 20779.85,
+        "east_london": 20779.85
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "10 001 to 30 000 tons",
+      "values": {
+        "cape_town": 3.53,
+        "east_london": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "10 001 to 30 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1.39,
+        "east_london": 1.39
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "30 001 to 60 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 43308.22,
+        "east_london": 43308.22
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "30 001 to 60 000 tons",
+      "values": {
+        "cape_town": 3.53,
+        "east_london": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "30 001 to 60 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1.2,
+        "east_london": 1.2
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "60 001 to 80 000",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 51494.21,
+        "east_london": 51494.21
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "60 001 to 80 000",
+      "values": {
+        "cape_town": 3.53,
+        "east_london": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First period of 24 hours or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "60 001 to 80 000",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 0.94,
+        "east_london": 0.94
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    }
+  ],
+  "general_conditions": "All charges subject to overstay penalties. 'Tons shall mean gross tonnage in cubic metres' for Cape Town and East London. For Durban, 'Tons shall mean gross tonnage in cubic metres' for preparation fees.  For Cape Town and East London, 'Tons shall mean gross tonnage in cubic metres'.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

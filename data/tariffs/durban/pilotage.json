@@ -1,0 +1,61 @@
+{
+  "port": "durban",
+  "charge_type": "pilotage",
+  "section": "3.3",
+  "description": "Pilotage dues for services (normal entering or leaving the port).",
+  "ports_covered": [
+    "richards_bay",
+    "durban",
+    "port_elizabeth",
+    "ngqura",
+    "cape_town",
+    "saldanha",
+    "east_london",
+    "mossel_bay"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Basic Fee Per Service (normal entering or leaving the port)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 30960.46,
+        "durban": 18608.61,
+        "port_elizabeth": 8970.0,
+        "ngqura": 8970.0,
+        "cape_town": 6342.39,
+        "saldanha": 9673.57,
+        "east_london": 6547.45,
+        "mossel_bay": 6547.45
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Per 100 tons or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 10.93,
+        "durban": 9.72,
+        "port_elizabeth": 14.33,
+        "ngqura": 14.33,
+        "cape_town": 10.2,
+        "saldanha": 13.66,
+        "east_london": 10.49,
+        "mossel_bay": 10.49
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "Pilotage is compulsory at specified ports. Surcharges apply for services outside ordinary working hours, vessel not ready on time, or cancellation within 30 minutes (60 minutes for Durban). Exemptions for SAPS and SANDF unless requested. Pilotage exemption certificates are valid per financial year. Fees for services other than normal entering/leaving (e.g., towage, standing by) are available on application.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

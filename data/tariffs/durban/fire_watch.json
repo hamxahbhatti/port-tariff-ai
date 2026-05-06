@@ -1,0 +1,40 @@
+{
+  "port": "durban",
+  "charge_type": "fire_watch",
+  "section": "4.3.1",
+  "description": "Tanker Fire Watch at the Port of Saldanha",
+  "ports_covered": [
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "12-36 Hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 8573.08
+      },
+      "unit": "Tug",
+      "notes": "Maximum fee"
+    },
+    {
+      "port": null,
+      "tonnage_band": "12-48 Hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 6802.58
+      },
+      "unit": "Tug",
+      "notes": "Maximum fee"
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 14,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

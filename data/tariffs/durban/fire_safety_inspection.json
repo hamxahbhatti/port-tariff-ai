@@ -1,0 +1,27 @@
+{
+  "port": "durban",
+  "charge_type": "fire_safety_inspection",
+  "section": "4.3.2",
+  "description": "\"Hotwork\" fire safety inspection service.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 376.8
+      },
+      "unit": "service",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 14,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

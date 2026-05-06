@@ -1,0 +1,41 @@
+{
+  "port": "durban",
+  "charge_type": "booking_fees",
+  "section": "6.2.1",
+  "description": "Deposits required for the use of a drydock, floating dock or syncrolift when a firm booking has been made.",
+  "ports_covered": [
+    "Cape Town",
+    "East London"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "drydock": 56222.56
+      },
+      "unit": "per booking",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "syncrolift": 14055.64
+      },
+      "unit": "per booking",
+      "notes": null
+    }
+  ],
+  "general_conditions": "The following deposits are required for the use of a drydock, floating dock or syncrolift when a firm booking has been made:",
+  "extraction_meta": {
+    "page_number": 17,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

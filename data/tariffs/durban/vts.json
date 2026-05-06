@@ -1,0 +1,122 @@
+{
+  "port": "durban",
+  "charge_type": "vts",
+  "section": "2.2",
+  "description": "Vessel Traffic Services (VTS) dues levied on all vessels per GT per port call. Charged on each port call (inward and outward).",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": "durban",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 0.65
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "richards_bay",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 0.54
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "east_london",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "east_london": 0.54
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "port_elizabeth",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "port_elizabeth": 0.54
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "cape_town",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 0.54
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "saldanha",
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 0.54
+      },
+      "unit": "per_GT",
+      "notes": "Per GT per port call."
+    },
+    {
+      "port": "all_ports_excluding_durban_and_saldanha",
+      "tonnage_band": "Per GT per port call",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports_excluding_durban_and_saldanha": 0.54
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "durban",
+      "tonnage_band": "Per GT per port call",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 0.65
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "all_ports",
+      "tonnage_band": "Minimum fee",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 235.52
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "VTS dues charged per GT per port call on all vessels.",
+  "extraction_meta": {
+    "page_number": 4,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

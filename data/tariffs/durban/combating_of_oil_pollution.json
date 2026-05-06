@@ -1,0 +1,49 @@
+{
+  "port": "durban",
+  "charge_type": "combating_of_oil_pollution",
+  "section": "4.8",
+  "description": "Fees for the combating of oil pollution in the port area.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1030.12
+      },
+      "unit": "per hour or part thereof",
+      "notes": "Utilization of oil boom per hour or part thereof"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": null
+      },
+      "unit": "per litre",
+      "notes": "Oil spill emulsifier will be charged per litre on application"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": null
+      },
+      "unit": null,
+      "notes": "Fees for any tugs used in the combating operation will be raised separately."
+    }
+  ],
+  "general_conditions": "The following fees must be raised for the combating of oil pollution in the port area.",
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

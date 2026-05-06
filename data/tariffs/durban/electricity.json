@@ -1,0 +1,15 @@
+{
+  "port": "durban",
+  "charge_type": "electricity",
+  "section": "4.6",
+  "description": "Fees for electricity supply.",
+  "ports_covered": [],
+  "rows": [],
+  "general_conditions": "Fees for electricity are available on application.",
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

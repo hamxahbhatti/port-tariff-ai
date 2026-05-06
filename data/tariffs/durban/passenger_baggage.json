@@ -1,0 +1,39 @@
+{
+  "port": "durban",
+  "charge_type": "passenger_baggage",
+  "section": "4.9",
+  "description": "Fees for handling of passenger's baggage other than manifested baggage, collected from owners/agents of passenger-carrying vessels for all passengers on embarkation or on disembarkation.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 90.19,
+        "richards_bay": 90.19,
+        "east_london": 90.19,
+        "port_elizabeth": 90.19,
+        "cape_town": 90.19,
+        "saldanha": 90.19
+      },
+      "unit": "per_passenger",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

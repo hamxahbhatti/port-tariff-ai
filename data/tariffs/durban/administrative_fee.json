@@ -1,0 +1,55 @@
+{
+  "port": "durban",
+  "charge_type": "administrative_fee",
+  "section": "4.11.1",
+  "description": "Amending fees applicable for all changes to marine order post invoicing which arise from customer initiated requests.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 459.37,
+        "richards_bay": 459.37,
+        "east_london": 459.37,
+        "port_elizabeth": 459.37,
+        "cape_town": 459.37,
+        "saldanha": 459.37
+      },
+      "unit": "per_request",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 470.98,
+        "richards_bay": 470.98,
+        "east_london": 470.98,
+        "port_elizabeth": 470.98,
+        "cape_town": 470.98,
+        "saldanha": 470.98
+      },
+      "unit": "per_party",
+      "notes": "PRIOR to vessel sailing"
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

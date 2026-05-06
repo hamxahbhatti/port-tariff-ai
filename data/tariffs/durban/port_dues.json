@@ -1,0 +1,164 @@
+{
+  "port": "durban",
+  "charge_type": "port_dues",
+  "section": "4.1.1",
+  "description": "Port dues payable by vessels entering the port, taking in bunkers, or using offshore moorings.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Basic fee per 100 tons or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 192.73,
+        "richards_bay": 192.73,
+        "east_london": 192.73,
+        "port_elizabeth": 192.73,
+        "cape_town": 192.73,
+        "saldanha": 192.73
+      },
+      "unit": "per 100 tons or part thereof",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "per 100 tons or part thereof per 24 hour period, a part of a 24 hour period being applied pro rata",
+      "is_incremental": true,
+      "parent_band": "Basic fee per 100 tons or part thereof",
+      "values": {
+        "durban": 57.79,
+        "richards_bay": 57.79,
+        "east_london": 57.79,
+        "port_elizabeth": 57.79,
+        "cape_town": 57.79,
+        "saldanha": 57.79
+      },
+      "unit": "per 100 tons or part thereof",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Hulks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 9.19,
+        "richards_bay": 9.19,
+        "east_london": 9.19,
+        "port_elizabeth": 9.19,
+        "cape_town": 9.19,
+        "saldanha": 9.19
+      },
+      "unit": "per metre, per day",
+      "notes": "An application to the Authority must be lodged prior to the event after which written approval will be granted if favourably considered."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Pleasure vessels",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": null,
+        "richards_bay": null,
+        "east_london": null,
+        "port_elizabeth": null,
+        "cape_town": null,
+        "saldanha": null
+      },
+      "unit": "per financial year",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Rowing boats",
+      "is_incremental": false,
+      "parent_band": "Pleasure vessels",
+      "values": {
+        "durban": 111.93,
+        "richards_bay": 111.93,
+        "east_london": 111.93,
+        "port_elizabeth": 111.93,
+        "cape_town": 111.93,
+        "saldanha": 111.93
+      },
+      "unit": "per financial year",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Other vessels of up to and including 6 metres in length overall",
+      "is_incremental": false,
+      "parent_band": "Pleasure vessels",
+      "values": {
+        "durban": 223.88,
+        "richards_bay": 223.88,
+        "east_london": 223.88,
+        "port_elizabeth": 223.88,
+        "cape_town": 223.88,
+        "saldanha": 223.88
+      },
+      "unit": "per financial year",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Other vessels of over 6 metres in length overall",
+      "is_incremental": false,
+      "parent_band": "Pleasure vessels",
+      "values": {
+        "durban": 447.71,
+        "richards_bay": 447.71,
+        "east_london": 447.71,
+        "port_elizabeth": 447.71,
+        "cape_town": 447.71,
+        "saldanha": 447.71
+      },
+      "unit": "per financial year",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "0-30 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {},
+      "unit": "per metre or part thereof of length overall, per day",
+      "notes": "Free stay of 30 days in port."
+    },
+    {
+      "port": null,
+      "tonnage_band": "next 90 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {},
+      "unit": "per metre or part thereof of length overall, per day",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "remaining period up to 12 months",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {},
+      "unit": "per metre or part thereof of length overall, per day",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "in excess of 12 months",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {},
+      "unit": "per metre or part thereof of length overall, per day",
+      "notes": null
+    }
+  ],
+  "general_conditions": "Small vessels and pleasure vessels resorting under Section 4 when visiting a port other than their registered port will be subject to a minimum fee of R470.98.",
+  "extraction_meta": {
+    "page_number": 11,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

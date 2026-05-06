@@ -1,0 +1,39 @@
+{
+  "port": "durban",
+  "charge_type": "permit_replacement_fee",
+  "section": "2.5",
+  "description": "Permit replacement fee.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 418.76,
+        "richards_bay": 418.76,
+        "east_london": 418.76,
+        "port_elizabeth": 418.76,
+        "cape_town": 418.76,
+        "saldanha": 418.76
+      },
+      "unit": "per_permit",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

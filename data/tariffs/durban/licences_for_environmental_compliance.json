@@ -1,0 +1,27 @@
+{
+  "port": "durban",
+  "charge_type": "licences_for_environmental_compliance",
+  "section": "5.3",
+  "description": "Fees payable for licences for environmental compliance.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "hull_cleaning_permit_fee": 18959.0
+      },
+      "unit": "per annum",
+      "notes": null
+    }
+  ],
+  "general_conditions": "Tariffs subject to VAT at 15%: Tariffs in South African Rand",
+  "extraction_meta": {
+    "page_number": 17,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

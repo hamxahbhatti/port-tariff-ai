@@ -1,0 +1,49 @@
+{
+  "port": "durban",
+  "charge_type": "pilotage_exemption",
+  "section": "3.5",
+  "description": "Pilotage exemption certificate fees.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to and including 30 metres in length overall",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 138.77
+      },
+      "unit": "ZAR per metre or part thereof",
+      "notes": "Minimum fee: 1387.74"
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels over 30 metres up to 50 metres in length overall",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 4163.85
+      },
+      "unit": "ZAR",
+      "notes": "Plus 208.23 per metre or part thereof over 30 metres"
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels over 50 metres up to 70 metres in length overall",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 8327.68
+      },
+      "unit": "ZAR",
+      "notes": "Plus 277.62 per metre or part thereof over 50 metres"
+    }
+  ],
+  "general_conditions": "Pilotage exemption certificates are valid per financial year. Licenses may be endorsed to cover all vessels of the same company if licenced and within the category covered. Fees adjusted for larger vessels. Cannot be applied to vessels without an exemption license.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

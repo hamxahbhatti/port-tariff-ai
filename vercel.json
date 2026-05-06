@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "outputDirectory": "frontend",
+  "buildCommand": "",
+  "framework": null,
+  "rewrites": [
+    { "source": "/static/:file", "destination": "/:file" }
+  ]
+}

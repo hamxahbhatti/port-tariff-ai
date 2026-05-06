@@ -1,0 +1,176 @@
+{
+  "port": "durban",
+  "charge_type": "fire_and_emergency_services",
+  "section": "4.3.1",
+  "description": "Fees for fire and emergency services.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Heavy duty (7 000 kg)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 3762.19,
+        "richards_bay": 3762.19,
+        "east_london": 3762.19,
+        "port_elizabeth": 3762.19,
+        "cape_town": 3762.19,
+        "saldanha": 3762.19
+      },
+      "unit": "per turn-out fee",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Light duty",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 2664.16,
+        "richards_bay": 2664.16,
+        "east_london": 2664.16,
+        "port_elizabeth": 2664.16,
+        "cape_town": 2664.16,
+        "saldanha": 2664.16
+      },
+      "unit": "per turn-out fee",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Heavy duty (7 000 kg)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 3762.19,
+        "richards_bay": 3762.19,
+        "east_london": 3762.19,
+        "port_elizabeth": 3762.19,
+        "cape_town": 3762.19,
+        "saldanha": 3762.19
+      },
+      "unit": "per turn-out fee",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Light duty",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 2664.16,
+        "richards_bay": 2664.16,
+        "east_london": 2664.16,
+        "port_elizabeth": 2664.16,
+        "cape_town": 2664.16,
+        "saldanha": 2664.16
+      },
+      "unit": "per turn-out fee",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1881.06,
+        "richards_bay": 1881.06,
+        "east_london": 1881.06,
+        "port_elizabeth": 1881.06,
+        "cape_town": 1881.06,
+        "saldanha": 1881.06
+      },
+      "unit": "per half hour or part thereof",
+      "notes": "Use of the fire tender, equipment and crew."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1881.06,
+        "richards_bay": 1881.06,
+        "east_london": 1881.06,
+        "port_elizabeth": 1881.06,
+        "cape_town": 1881.06,
+        "saldanha": 1881.06
+      },
+      "unit": "per half hour or part thereof",
+      "notes": "Use of Hazmat vehicle, equipment and crew."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 314.98,
+        "richards_bay": 314.98,
+        "east_london": 314.98,
+        "port_elizabeth": 314.98,
+        "cape_town": 314.98,
+        "saldanha": 314.98
+      },
+      "unit": "per half hour or part thereof",
+      "notes": "Additional fire fighting staff fee - each additional member of the fire service assisting in any incident mentioned under A, B and C."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 314.98,
+        "richards_bay": 314.98,
+        "east_london": 314.98,
+        "port_elizabeth": 314.98,
+        "cape_town": 314.98,
+        "saldanha": 314.98
+      },
+      "unit": "per half hour or part thereof",
+      "notes": "Fire fighter on standby duty at the incident including equipment."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 500.44,
+        "richards_bay": 500.44,
+        "east_london": 500.44,
+        "port_elizabeth": 500.44,
+        "cape_town": 500.44,
+        "saldanha": 500.44
+      },
+      "unit": "per half hour or part thereof",
+      "notes": "Use of a portable fire pump, chemical transfer pump, generator, \"veld fire\" pump, bobcat including the fire fighter to operate the pump."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 470.98,
+        "richards_bay": 470.98,
+        "east_london": 470.98,
+        "port_elizabeth": 470.98,
+        "cape_town": 470.98,
+        "saldanha": 470.98
+      },
+      "unit": "per set",
+      "notes": "Use of additional breathing apparatus. Per set \u2014 this is in addition to the breathing apparatus sets carried on the fire tender or hazmat vehicle."
+    }
+  ],
+  "general_conditions": "Fees applicable at ports where these services or equipment are available. Refer to A, B and C for the following emergency or incidents below.",
+  "extraction_meta": {
+    "page_number": 13,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

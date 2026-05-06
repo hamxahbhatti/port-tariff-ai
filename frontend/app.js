@@ -1,5 +1,10 @@
 'use strict';
 
+// ── API base URL ──────────────────────────────────────────────────────────
+// Empty string → relative URLs (local dev served by FastAPI).
+// Set window.API_BASE before this script loads to point at a remote backend.
+const API_BASE = window.API_BASE || '';
+
 // ── Charge metadata ────────────────────────────────────────────────────────
 const CHARGE_META = {
   light_dues:       { label: 'Light Dues',       icon: '☀' },
@@ -187,7 +192,7 @@ async function sendMessage() {
   if (!debugOpen) toggleDebug();
 
   try {
-    const res = await fetch('/chat', {
+    const res = await fetch(`${API_BASE}/chat`, {
       method:  'POST',
       headers: { 'Content-Type': 'application/json' },
       body:    JSON.stringify({ session_id: sessionId, message: text }),

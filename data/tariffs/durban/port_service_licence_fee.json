@@ -1,0 +1,71 @@
+{
+  "port": "durban",
+  "charge_type": "port_service_licence_fee",
+  "section": "5.1",
+  "description": "Fees payable for port service licence to be issued by the Authority in terms of Section 57 of the National Ports Act, No. 12 of 2005. Licence fees are payable in equal installments, on an annual basis, over the period of the licence.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 22576.31,
+        "richards_bay": 22576.31,
+        "east_london": 22576.31,
+        "port_elizabeth": 22576.31,
+        "cape_town": 22576.31,
+        "saldanha": 22576.31
+      },
+      "unit": "per_port",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 22576.31,
+        "richards_bay": 22576.31,
+        "east_london": 22576.31,
+        "port_elizabeth": 22576.31,
+        "cape_town": 22576.31,
+        "saldanha": 22576.31
+      },
+      "unit": "per_port",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 22576.31,
+        "richards_bay": 22576.31,
+        "east_london": 22576.31,
+        "port_elizabeth": 22576.31,
+        "cape_town": 22576.31,
+        "saldanha": 22576.31
+      },
+      "unit": "per_port",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

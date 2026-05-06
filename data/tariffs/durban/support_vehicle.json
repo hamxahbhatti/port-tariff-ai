@@ -1,0 +1,27 @@
+{
+  "port": "durban",
+  "charge_type": "support_vehicle",
+  "section": "4.3.1",
+  "description": "Emergency support vehicle",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 8.81
+      },
+      "unit": "R/km",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 14,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

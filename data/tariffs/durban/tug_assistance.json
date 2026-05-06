@@ -1,0 +1,115 @@
+{
+  "port": "durban",
+  "charge_type": "tug_assistance",
+  "section": "3.6",
+  "description": "Tugs/vessel assistance and/or attendance fees per service based on vessel's tonnage.",
+  "ports_covered": [
+    "richards_bay",
+    "durban",
+    "east_london",
+    "port_elizabeth",
+    "ngqura",
+    "mossel_bay",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Up to 2 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 7001.67,
+        "durban": 8140.0,
+        "east_london": 5622.16,
+        "port_elizabeth": 7206.98,
+        "ngqura": 7206.98,
+        "mossel_bay": 6316.53,
+        "cape_town": 5411.47,
+        "saldanha": 9038.42
+      },
+      "unit": "ZAR",
+      "notes": "0.50 Represents workboat"
+    },
+    {
+      "port": null,
+      "tonnage_band": "2 000 - 10 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 13020.67,
+        "durban": 12633.99,
+        "east_london": 8152.14,
+        "port_elizabeth": 11168.45,
+        "ngqura": 11168.45,
+        "mossel_bay": 8152.14,
+        "cape_town": 7898.57,
+        "saldanha": 15378.78
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus Per 100 tons or part thereof above 2 000",
+      "is_incremental": true,
+      "parent_band": "2 000 - 10 000 tons",
+      "values": {
+        "richards_bay": 275.32,
+        "durban": 268.99,
+        "east_london": 200.97,
+        "port_elizabeth": 237.53,
+        "ngqura": 237.53,
+        "mossel_bay": 173.37,
+        "cape_town": 194.63,
+        "saldanha": 327.43
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "10 001 - 50 000 tons Plus",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 39999.88,
+        "durban": 38494.51,
+        "east_london": 27956.91,
+        "port_elizabeth": 32257.98,
+        "ngqura": 32257.98,
+        "mossel_bay": 25806.37,
+        "cape_town": 27741.85,
+        "saldanha": 47311.7
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Per 100 tons or part thereof above 10 000",
+      "is_incremental": true,
+      "parent_band": "10 001 - 50 000 tons Plus",
+      "values": {
+        "richards_bay": 101.08,
+        "durban": 84.95,
+        "east_london": 66.67,
+        "port_elizabeth": 73.1,
+        "ngqura": 73.1,
+        "mossel_bay": 60.21,
+        "cape_town": 64.52,
+        "saldanha": 103.23
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "The craft type and number thereof to be allocated for a service will be decided by the port. Surcharges apply for services outside ordinary working hours, Sundays/public holidays, additional tugs requested by master or deemed necessary for safety, and for servicing vessels without own power. Cancellation of standby services outside ordinary working hours incurs fees as if performed. Delays in arrival/departure incur additional charges.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

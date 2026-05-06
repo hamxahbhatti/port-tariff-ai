@@ -1,0 +1,71 @@
+{
+  "port": "durban",
+  "charge_type": "late_fees",
+  "section": "8.3",
+  "description": "Penalty application for late submission of cargo dues order.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "31 - 60 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": "10% Value of Cargo dues order"
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "61 - 90 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": "30% Value of Cargo dues order"
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "91 - 120 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": "50% Value of Cargo dues order"
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": ">120 days",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": "100% Value of Cargo dues order"
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Late order fee for late and incomplete or non-submission of manifests/outturns",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 1682.72
+      },
+      "unit": "ZAR per manifest/outturn",
+      "notes": null
+    }
+  ],
+  "general_conditions": "These penalties are applied for late submission of cargo dues orders. An amendment of a cargo dues order submitted late will also attract late order fee charges.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

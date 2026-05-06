@@ -1,0 +1,198 @@
+{
+  "port": "durban",
+  "charge_type": "running_of_lines",
+  "section": "3.9",
+  "description": "Running of vessels' lines service fees.",
+  "ports_covered": [
+    "port_elizabeth",
+    "ngqura",
+    "cape_town",
+    "saldanha",
+    "other_ports"
+  ],
+  "rows": [
+    {
+      "port": "port_elizabeth",
+      "tonnage_band": "Per service",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "port_elizabeth": 2266.73
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "cape_town",
+      "tonnage_band": "Per service",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 2370.84
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "saldanha",
+      "tonnage_band": "Per service",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 2085.59
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "other_ports",
+      "tonnage_band": "Per service",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "other_ports": 1654.56
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "port_elizabeth",
+      "tonnage_band": "Minimum fee if the service terminates or commences outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "port_elizabeth": 4533.42
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "cape_town",
+      "tonnage_band": "Minimum fee if the service terminates or commences outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 3309.05
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "saldanha",
+      "tonnage_band": "Minimum fee if the service terminates or commences outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 4171.18
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "other_ports",
+      "tonnage_band": "Minimum fee if the service terminates or commences outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "other_ports": 3309.05
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "port_elizabeth",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "port_elizabeth": 2266.73
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "cape_town",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 2370.84
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "saldanha",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 2085.59
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "other_ports",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "other_ports": 1654.56
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "port_elizabeth",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "port_elizabeth": 4533.42
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "cape_town",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 4741.69
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "saldanha",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "saldanha": 4171.18
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": "other_ports",
+      "tonnage_band": "Per service If the service commences terminates or outside ordinary working hours",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "other_ports": 3309.05
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "If the vessel arrives or departs 30 minutes or more after the notified time, additional charges apply per hour or part thereof. Cancellation of standby services after commencement incurs fees as if performed, subject to a minimum of 2 hours. Special fee for remooring without tug/pilots at Saldanha.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

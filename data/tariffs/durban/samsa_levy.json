@@ -1,0 +1,27 @@
+{
+  "port": "durban",
+  "charge_type": "samsa_levy",
+  "section": "1.2",
+  "description": "SAMSA levies as prescribed in the SAMSA Levy Determination Regulations.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Per 100 tons or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_vessels": 117.08
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "Payable by the vessel's owner, charterer, operator or agent. Exemptions for foreign naval/war vessels.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

@@ -1,0 +1,855 @@
+{
+  "port": "durban",
+  "charge_type": "cargo_dues",
+  "section": "7.1",
+  "description": "Cargo dues on Breakbulk commodities.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Alumina",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Articles of cement / sand / stone",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Bait",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Bricks",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Cement & clinker",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 5.46
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Chrome ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.85,
+        "exports": 15.47
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Citrus fruit",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 25.14,
+        "exports": 25.14
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Clay",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Coal",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 10.55,
+        "exports": 4.53
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fertilizers",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 26.76,
+        "exports": 19.13
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fish meal & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 30.56
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fluorspar",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Glass & glassware",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 17.17
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Granite & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 10.56
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Gypsum & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Iron ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Lead & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 21.84
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Lime & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 27.33,
+        "exports": 27.33
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Logs",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.56,
+        "exports": 7.31
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Maize & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 30.08,
+        "exports": 30.08
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Manganese ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": null,
+        "exports": null
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Agricultural products / seaweed",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Alumina",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Andalusite",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 13.51
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Barley & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Cement & clinker",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 5.78
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Chrome ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 6.95
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Coal",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 11.7,
+        "exports": 5.96
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Copper concentrates",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Cotton seed & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Ferro alloys",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fertilizer & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fluorspar & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Grain & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Gypsum & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Iron Ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 10.65
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Iron Oxide (Hematite)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 9.82
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Lead & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Maize & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 15.41
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Malt & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Manganese ore",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 10.05
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Ores & minerals: Magnetite",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 5.22
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Ores & minerals: Silico Manganese",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Petroleum Coke",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Pig iron",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 15.41
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Potash & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Rice & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Rockphosphate",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 11.0,
+        "exports": 11.0
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Rutile",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Salt",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 6.76,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Soda ash",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Steel: Steel pellets",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 10.61,
+        "exports": 7.74
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Sugar",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Sulphur",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 7.34,
+        "exports": 7.34
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Timber products: Wood shavings, sawdust",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 8.09
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Titanium slag",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Wheat & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Woodchips",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": null
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Zinc & products thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 8.09
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Zircon",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "imports": 18.49,
+        "exports": 18.49
+      },
+      "unit": "ZAR per metric ton",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Cargo dues order amendment fee per order",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 336.53
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Late, incomplete and non-submission of manifests and outturn reports",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 1682.72
+      },
+      "unit": "ZAR per manifest/outturn report",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Cargo dues order framing fee per order",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 336.53
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Per trip",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 398.96
+      },
+      "unit": "ZAR",
+      "notes": "Administrative fees for photocopies per page"
+    },
+    {
+      "port": null,
+      "tonnage_band": "Photocopies per page",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 10.54
+      },
+      "unit": "ZAR",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "6m / 20' containers",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 74.64,
+        "richards_bay": 74.64,
+        "east_london": 74.64,
+        "port_elizabeth": 74.64,
+        "cape_town": 74.64,
+        "saldanha": 74.64
+      },
+      "unit": "per container per leg inwards or outwards",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "12m / 40', 13,7m / 45' containers",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 149.26,
+        "richards_bay": 149.26,
+        "east_london": 149.26,
+        "port_elizabeth": 149.26,
+        "cape_town": 149.26,
+        "saldanha": 149.26
+      },
+      "unit": "per container per leg inwards or outwards",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Empty containers, all sizes",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 73.16,
+        "richards_bay": 73.16,
+        "east_london": 73.16,
+        "port_elizabeth": 73.16,
+        "cape_town": 73.16,
+        "saldanha": 73.16
+      },
+      "unit": "per container per leg inwards or outwards",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Other cargo",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 4.31,
+        "richards_bay": 4.31,
+        "east_london": 4.31,
+        "port_elizabeth": 4.31,
+        "cape_town": 4.31,
+        "saldanha": 4.31
+      },
+      "unit": "per ton per leg inwards or outwards",
+      "notes": null
+    }
+  ],
+  "general_conditions": "Cargo dues are levied at all ports to recover cargo contribution towards port infrastructure. The unit of tonnage is 1 metric ton (1000 kg), subject to a minimum of 1 ton.  All packaging is included.  Tonnage must be substantiated by documentation. Late order fees apply for incorrectly declared tonnage. Minimum fee for breakbulk is based on 1 ton.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

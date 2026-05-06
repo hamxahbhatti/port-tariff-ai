@@ -1,0 +1,50 @@
+{
+  "port": "durban",
+  "charge_type": "light_dues",
+  "section": "2.1",
+  "description": "Light dues are levied on all vessels calling at South African ports based on Gross Tonnage. Charged once per voyage (inward leg only). Vessels in ballast are exempt from light dues.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "All vessels",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 117.08,
+        "richards_bay": 117.08,
+        "east_london": 117.08,
+        "port_elizabeth": 117.08,
+        "cape_town": 117.08,
+        "saldanha": 117.08
+      },
+      "unit": "per_100GT",
+      "notes": "Rate per 100 GT or part thereof. Charged on inward voyage only."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Per metre or part thereof of the length overall per financial year or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_other_vessels": 24.64
+      },
+      "unit": "ZAR",
+      "notes": "Payable by self-propelled vessels, vessels licensed by the Department of Environmental Affairs and Tourism, at their registered port."
+    }
+  ],
+  "general_conditions": "Light dues are levied once per voyage on the inward leg. Vessels in ballast are exempt. Rate applies per 100 GT or part thereof.",
+  "extraction_meta": {
+    "page_number": 3,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

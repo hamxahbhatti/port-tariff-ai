@@ -1,0 +1,52 @@
+{
+  "port": "durban",
+  "charge_type": "berthing",
+  "section": "3.8",
+  "description": "Fees for berthing services including conveyance of staff, for vessels entering or leaving a port, shifting berth, undergoing engine trials, remooring and crewing, berthing gang standing by or detained at a vessel's request, with or without tug/vessel assisting or in attendance (unmooring and mooring of a vessel when shifting berth or warping alongside the berth). Berthing services provided when a vessel shifts berth alongside the berth and will be charged on a per service basis and berthing and unberthing will be charged as two separate services.",
+  "ports_covered": [
+    "Richards Bay",
+    "Port Elizabeth / Ngqura",
+    "Cape Town",
+    "Saldanha",
+    "Other Ports"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Basic fee",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "richards_bay": 3175.89,
+        "port_elizabeth_ngqura": 3838.62,
+        "cape_town": 3052.33,
+        "saldanha": 4006.34,
+        "other_ports": 2801.91
+      },
+      "unit": "per_service",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Per 100 tons or part thereof",
+      "is_incremental": true,
+      "parent_band": "Basic fee",
+      "values": {
+        "richards_bay": 13.46,
+        "port_elizabeth_ngqura": 18.72,
+        "cape_town": 14.92,
+        "saldanha": 16.97,
+        "other_ports": 13.68
+      },
+      "unit": "per_100GT",
+      "notes": null
+    }
+  ],
+  "general_conditions": "A surcharge of 50% will be payable in the following instances:\nIf the service either terminates or commences outside ordinary working hours;\nShould the request for the berthing staff to remain/come on duty outside ordinary working hours be cancelled at any time after standby has commenced;\nIf the vessel arrives or departs 30 minutes or more after the notified time.",
+  "extraction_meta": {
+    "page_number": 9,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

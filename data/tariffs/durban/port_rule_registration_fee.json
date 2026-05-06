@@ -1,0 +1,39 @@
+{
+  "port": "durban",
+  "charge_type": "port_rule_registration_fee",
+  "section": "2.2",
+  "description": "Port rule registration (fee for duration of registration) per port.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 742.65,
+        "richards_bay": 742.65,
+        "east_london": 742.65,
+        "port_elizabeth": 742.65,
+        "cape_town": 742.65,
+        "saldanha": 742.65
+      },
+      "unit": "per_port",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

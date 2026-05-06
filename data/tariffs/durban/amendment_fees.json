@@ -1,0 +1,27 @@
+{
+  "port": "durban",
+  "charge_type": "amendment_fees",
+  "section": "8.4",
+  "description": "Amending orders fees.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Amending fee per order (after seven days)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "all_ports": 336.53
+      },
+      "unit": "ZAR",
+      "notes": null
+    }
+  ],
+  "general_conditions": "First amendment within 7 days (including weekends and public holidays) not impacting invoice value is free. After seven days, an amending fee is charged per order. Amendments to transshipment to import orders may incur late order fees if made after 90 days.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

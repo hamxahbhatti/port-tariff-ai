@@ -1,0 +1,93 @@
+{
+  "port": "durban",
+  "charge_type": "fire_equipment_hire",
+  "section": "4.3.5",
+  "description": "Tariffs for hiring fire equipment.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 487.25
+      },
+      "unit": "per day",
+      "notes": "Training Facilities Hire (excluding fire equipment)"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 500.47
+      },
+      "unit": "per half hour",
+      "notes": "Fire pump hire"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 188.37
+      },
+      "unit": "per half hour",
+      "notes": "Ejector pump hire"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 47.11
+      },
+      "unit": "per half hour",
+      "notes": "Fire hose hire"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 47.11
+      },
+      "unit": "per 8 hr day",
+      "notes": "Branch pipe and nozzle hire"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 156.06
+      },
+      "unit": "per 8 hr day",
+      "notes": "Fire extinguisher hire"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 762.19
+      },
+      "unit": "per hour",
+      "notes": "Fire tender and driver \u2014 social functions"
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

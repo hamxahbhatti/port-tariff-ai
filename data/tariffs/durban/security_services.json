@@ -1,0 +1,29 @@
+{
+  "port": "durban",
+  "charge_type": "security_services",
+  "section": "4.4",
+  "description": "Tariffs for security services.",
+  "ports_covered": [
+    "durban"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 192.11
+      },
+      "unit": "per day",
+      "notes": "Crew Transportation per day"
+    }
+  ],
+  "general_conditions": "Vehicle provided by the Authority's security to crew members for vessels at Island View berths 1-8 to transport crew members from vessel to Check Point",
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

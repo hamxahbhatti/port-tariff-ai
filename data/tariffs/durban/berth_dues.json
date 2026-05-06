@@ -1,0 +1,240 @@
+{
+  "port": "durban",
+  "charge_type": "berth_dues",
+  "section": "4.1.2",
+  "description": "Berth dues payable by any vessel occupying a repair quay or any other berth and not handling cargo, for each 24 hour period or part thereof.",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Per 100 tons or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 50.56,
+        "richards_bay": 50.56,
+        "east_london": 50.56,
+        "port_elizabeth": 50.56,
+        "cape_town": 50.56,
+        "saldanha": 50.56
+      },
+      "unit": "per 100 tons or part thereof",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Up to 17 700 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 33.45,
+        "richards_bay": 33.45,
+        "east_london": 33.45,
+        "port_elizabeth": 33.45,
+        "cape_town": 33.45,
+        "saldanha": 33.45
+      },
+      "unit": "per 100 tons or part thereof",
+      "notes": "For the following 17 600 tons (up to 35 300 tons)."
+    },
+    {
+      "port": null,
+      "tonnage_band": "The following 17 700 tons (up to 53 000 tons)",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 16.82,
+        "richards_bay": 16.82,
+        "east_london": 16.82,
+        "port_elizabeth": 16.82,
+        "cape_town": 16.82,
+        "saldanha": 16.82
+      },
+      "unit": "per 100 tons or part thereof",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Over 53 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": null,
+        "richards_bay": null,
+        "east_london": null,
+        "port_elizabeth": null,
+        "cape_town": null,
+        "saldanha": null
+      },
+      "unit": null,
+      "notes": "No additional fee."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": null,
+        "richards_bay": null,
+        "east_london": null,
+        "port_elizabeth": null,
+        "cape_town": null,
+        "saldanha": null
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Non-mechanically propelled boats",
+      "is_incremental": false,
+      "parent_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "values": {
+        "durban": 47.0,
+        "richards_bay": 47.0,
+        "east_london": 47.0,
+        "port_elizabeth": 47.0,
+        "cape_town": 47.0,
+        "saldanha": 47.0
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Self-propelled boats",
+      "is_incremental": false,
+      "parent_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "values": {
+        "durban": 78.41,
+        "richards_bay": 78.41,
+        "east_london": 78.41,
+        "port_elizabeth": 78.41,
+        "cape_town": 78.41,
+        "saldanha": 78.41
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fishing vessels (however propelled) operating from the fishing harbour at the Port of Saldanha",
+      "is_incremental": false,
+      "parent_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "values": {
+        "durban": 137.66,
+        "richards_bay": 137.66,
+        "east_london": 137.66,
+        "port_elizabeth": 137.66,
+        "cape_town": 137.66,
+        "saldanha": 137.66
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fishing vessels (however propelled), with non-steel constructed hulls",
+      "is_incremental": false,
+      "parent_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "values": {
+        "durban": null,
+        "richards_bay": null,
+        "east_london": null,
+        "port_elizabeth": null,
+        "cape_town": null,
+        "saldanha": null
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "For the first 10 metres",
+      "is_incremental": true,
+      "parent_band": "Fishing vessels (however propelled), with non-steel constructed hulls",
+      "values": {
+        "durban": 189.37,
+        "richards_bay": 189.37,
+        "east_london": 189.37,
+        "port_elizabeth": 189.37,
+        "cape_town": 189.37,
+        "saldanha": 189.37
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Thereafter",
+      "is_incremental": true,
+      "parent_band": "Fishing vessels (however propelled), with non-steel constructed hulls",
+      "values": {
+        "durban": 378.68,
+        "richards_bay": 378.68,
+        "east_london": 378.68,
+        "port_elizabeth": 378.68,
+        "cape_town": 378.68,
+        "saldanha": 378.68
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Fishing vessels (however propelled), with steel constructed hulls",
+      "is_incremental": false,
+      "parent_band": "Small vessels: Per financial year or part thereof, per metre of length overall, or part thereof",
+      "values": {
+        "durban": null,
+        "richards_bay": null,
+        "east_london": null,
+        "port_elizabeth": null,
+        "cape_town": null,
+        "saldanha": null
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "For the first 10 metres",
+      "is_incremental": true,
+      "parent_band": "Fishing vessels (however propelled), with steel constructed hulls",
+      "values": {
+        "durban": 382.31,
+        "richards_bay": 382.31,
+        "east_london": 382.31,
+        "port_elizabeth": 382.31,
+        "cape_town": 382.31,
+        "saldanha": 382.31
+      },
+      "unit": "per metre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "Thereafter",
+      "is_incremental": true,
+      "parent_band": "Fishing vessels (however propelled), with steel constructed hulls",
+      "values": {
+        "durban": 764.52,
+        "richards_bay": 764.52,
+        "east_london": 764.52,
+        "port_elizabeth": 764.52,
+        "cape_town": 764.52,
+        "saldanha": 764.52
+      },
+      "unit": "per metre",
+      "notes": null
+    }
+  ],
+  "general_conditions": "A vessel paying the fees for the use of a drydock, floating dock, syncrolift or slipway can lie alongside a quay for repairs without paying berth dues for the same number of days as it did inside the drydock, floating dock, or on the syncrolift or slipway. Vessels calling for the sole purpose of landing/shipping/transhipping cargo are allowed a free period of six cargo working hours before cargo working commences and six cargo working hours after cessation of cargo working per call, at berths other than container handling berths in respect of which the free period is two cargo working hours.",
+  "extraction_meta": {
+    "page_number": 11,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

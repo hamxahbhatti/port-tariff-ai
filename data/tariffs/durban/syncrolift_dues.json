@@ -1,0 +1,106 @@
+{
+  "port": "durban",
+  "charge_type": "syncrolift_dues",
+  "section": "6.6",
+  "description": "Syncrolift dues for the Port of Cape Town.",
+  "ports_covered": [
+    "cape_town"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to 2 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1602.33
+      },
+      "unit": "ZAR",
+      "notes": "First 24 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "Vessels up to 2 000 tons",
+      "values": {
+        "cape_town": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First 24 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessels up to 2 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 801.19
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "Vessels up to 2 000 tons",
+      "values": {
+        "cape_town": 1.46
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessel above 2 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 2108.35
+      },
+      "unit": "ZAR",
+      "notes": "First 24 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "Vessel above 2 000 tons",
+      "values": {
+        "cape_town": 3.53
+      },
+      "unit": "ZAR",
+      "notes": "First 24 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Vessel above 2 000 tons",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "cape_town": 1054.16
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    },
+    {
+      "port": null,
+      "tonnage_band": "Plus per ton",
+      "is_incremental": true,
+      "parent_band": "Vessel above 2 000 tons",
+      "values": {
+        "cape_town": 1.46
+      },
+      "unit": "ZAR",
+      "notes": "Each subsequent 12 hour period or part thereof."
+    }
+  ],
+  "general_conditions": "All charges subject to overstay penalties. Special conditions may apply to Medical, Research vessels or companies with multiple drydockings.",
+  "extraction_meta": {
+    "page_number": 2,
+    "confident": true,
+    "flagged": false,
+    "mineru_backup_available": false
+  }
+}

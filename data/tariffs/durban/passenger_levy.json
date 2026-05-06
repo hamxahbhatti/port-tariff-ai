@@ -1,0 +1,71 @@
+{
+  "port": "durban",
+  "charge_type": "passenger_levy",
+  "section": "4.10",
+  "description": "Levy charge in addition to baggage charge for all passengers on embarkation or disembarkation.",
+  "ports_covered": [
+    "durban",
+    "richards_bay",
+    "east_london",
+    "port_elizabeth",
+    "cape_town",
+    "saldanha"
+  ],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 95.07,
+        "richards_bay": 95.07,
+        "east_london": 95.07,
+        "port_elizabeth": 95.07,
+        "cape_town": 95.07,
+        "saldanha": 95.07
+      },
+      "unit": "per_passenger",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 95.07,
+        "richards_bay": 95.07,
+        "east_london": 95.07,
+        "port_elizabeth": 95.07,
+        "cape_town": 95.07,
+        "saldanha": 95.07
+      },
+      "unit": "per_passenger",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 95.07,
+        "richards_bay": 95.07,
+        "east_london": 95.07,
+        "port_elizabeth": 95.07,
+        "cape_town": 95.07,
+        "saldanha": 95.07
+      },
+      "unit": "per_call",
+      "notes": null
+    }
+  ],
+  "general_conditions": "The passenger levy is raised at all ports where passengers embark, disembark or visit the ports. The levy is raised on a per call basis.",
+  "extraction_meta": {
+    "page_number": 16,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "port": "durban",
+  "charge_type": "removal_of_refuse",
+  "section": "4.7",
+  "description": "Fees for the removal of refuse from the port.",
+  "ports_covered": [],
+  "rows": [],
+  "general_conditions": "Fees for the removal of refuse from the port are compulsory (where applicable) and available on application.",
+  "extraction_meta": {
+    "page_number": 15,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

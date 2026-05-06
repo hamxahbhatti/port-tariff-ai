@@ -1,0 +1,126 @@
+{
+  "port": "durban",
+  "charge_type": "fire_protection",
+  "section": "4.3.1",
+  "description": "Use of additional chemical protection suits. Per suit - this is in addition to the chemical suit carried on the hazmat vehicle",
+  "ports_covered": [],
+  "rows": [
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 1881.06
+      },
+      "unit": "per suit",
+      "notes": "this is in addition to the chemical suit carried on the hazmat vehicle"
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 94.24
+      },
+      "unit": "per litre",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": "A: 9 Lt water fire extinguisher",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 156.06
+      },
+      "unit": "each",
+      "notes": "The fees below include the cost of material, labour and supervision involved in the re-charging of the equipment."
+    },
+    {
+      "port": null,
+      "tonnage_band": "B: 9 Lt foam fire extinguisher",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 188.37
+      },
+      "unit": "each",
+      "notes": "The fees below include the cost of material, labour and supervision involved in the re-charging of the equipment."
+    },
+    {
+      "port": null,
+      "tonnage_band": "C: 9 kg Dry powder fire extinguisher",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 235.52
+      },
+      "unit": "each",
+      "notes": "The fees below include the cost of material, labour and supervision involved in the re-charging of the equipment."
+    },
+    {
+      "port": null,
+      "tonnage_band": "D: 5-7 kg Carbon Dioxide fire extinguisher",
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 376.8
+      },
+      "unit": "each",
+      "notes": "The fees below include the cost of material, labour and supervision involved in the re-charging of the equipment."
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 350.3
+      },
+      "unit": "per hour",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 594.46
+      },
+      "unit": "per hour",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 350.3
+      },
+      "unit": "per hour",
+      "notes": null
+    },
+    {
+      "port": null,
+      "tonnage_band": null,
+      "is_incremental": false,
+      "parent_band": null,
+      "values": {
+        "durban": 594.46
+      },
+      "unit": "per hour",
+      "notes": null
+    }
+  ],
+  "general_conditions": null,
+  "extraction_meta": {
+    "page_number": 14,
+    "confident": false,
+    "flagged": true,
+    "mineru_backup_available": false
+  }
+}

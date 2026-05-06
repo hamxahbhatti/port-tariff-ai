@@ -4,7 +4,7 @@ __pycache__/
 *.pyo
 .DS_Store
 data/chroma_db/
-data/tariffs/
+# data/tariffs/ is intentionally tracked so Railway has the extracted rate tables
 *.pdf
 .venv/
 venv/
