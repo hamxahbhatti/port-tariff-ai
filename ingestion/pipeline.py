@@ -2,12 +2,17 @@
 Main ingestion pipeline orchestrator.
 
 Flow:
-  1. Docling parses full PDF → prose chunks + table page list
-  2. Gemini Vision (double-pass) extracts tables from flagged pages
-  3. MinerU handles any pages Docling failed on
-  4. Results written to:
-     - knowledge_store/tariff_store.py  (structured JSON per charge/port)
-     - knowledge_store/vector_store.py  (ChromaDB for prose + descriptions)
+  1. Docling parses full PDF → prose chunks + table page list (local, ~60s)
+  2. Smart routing per table page:
+       a. Docling markdown looks clean → batch Gemini TEXT call (1 API call)
+       b. Docling markdown looks sparse/complex → Gemini Vision double-pass
+     Typically only 3-8 of 23 pages need Vision.
+  3. MinerU handles any pages Vision still flags
+  4. Results written progressively (per page) to:
+       knowledge_store/tariff_store/  (JSON per charge type)
+       knowledge_store/vector_store/  (ChromaDB for prose + descriptions)
+
+Typical runtime: ~2-4 minutes (vs hours with Vision-on-every-page).
 """
 
 from __future__ import annotations
@@ -33,8 +38,7 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
 
     Args:
         pdf_path:  Path to the tariff PDF.
-        port_name: Canonical port name (e.g. 'durban'). Used as the
-                   storage key in the tariff JSON store.
+        port_name: Canonical port name (e.g. 'durban').
 
     Returns:
         Summary dict with counts of what was extracted.
@@ -44,12 +48,15 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
 
     logger.info(f"Pipeline: starting ingestion for '{port_name}' — {pdf_path.name}")
 
+    from knowledge_store.tariff_store import save_tables
+    from knowledge_store.vector_store import save_prose_chunks
+
     # ── Step 1: Docling ────────────────────────────────────────────────────
-    logger.info("Step 1/3: Docling — layout parsing")
+    logger.info("Step 1/3: Docling — layout + table structure parsing (local)")
     try:
         docling_result = docling_parser.parse(pdf_path)
     except Exception as e:
-        logger.error(f"Docling failed entirely: {e}")
+        logger.error(f"Docling failed: {e}")
         raise
 
     logger.info(
@@ -57,8 +64,8 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
         f"{len(docling_result.table_pages)} table pages"
     )
 
-    # ── Step 2: Gemini Vision on table pages ──────────────────────────────
-    logger.info("Step 2/3: Gemini Vision — table extraction (double-pass)")
+    # ── Step 2: Smart extraction (text batch + Vision only where needed) ───
+    logger.info("Step 2/3: Smart extraction — text batch + Vision on complex pages")
 
     if not docling_result.table_pages:
         logger.warning("No table pages found by Docling — check the PDF")
@@ -70,11 +77,11 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
         )
 
     logger.info(
-        f"Vision done: {len(vision_output.results)} pages processed, "
+        f"Extraction done: {len(vision_output.results)} pages, "
         f"{len(vision_output.flagged_pages)} flagged"
     )
 
-    # ── Step 3: MinerU backup for failed pages ─────────────────────────────
+    # ── Step 3: MinerU backup for flagged pages ────────────────────────────
     logger.info("Step 3/3: MinerU backup (flagged pages only)")
 
     mineru_results: dict[int, str] = {}
@@ -92,13 +99,16 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
                 "Install with: pip install mineru"
             )
 
-    # ── Step 4: Save to knowledge store ───────────────────────────────────
-    logger.info("Saving to knowledge store")
+    # ── Step 4: Save progressively (per page) ─────────────────────────────
+    logger.info("Saving to knowledge store (progressive)")
 
-    from knowledge_store.tariff_store import save_tables
-    from knowledge_store.vector_store import save_prose_chunks
+    tables_saved = 0
+    for result in vision_output.results:
+        saved = save_tables(port_name, [result], mineru_results)
+        tables_saved += saved
+        if saved:
+            logger.info(f"Saved {saved} table(s) from page {result.page_number}")
 
-    tables_saved = save_tables(port_name, vision_output.results, mineru_results)
     chunks_saved = save_prose_chunks(port_name, docling_result.prose_chunks)
 
     summary = {
@@ -114,3 +124,12 @@ def run(pdf_path: str | Path, port_name: str) -> dict:
 
     logger.info(f"Pipeline complete: {summary}")
     return summary
+
+
+if __name__ == "__main__":
+    import json
+    import os
+
+    pdf = Path.home() / "Downloads" / "Port Tariff.pdf"
+    result = run(pdf, "durban")
+    print(json.dumps(result, indent=2))

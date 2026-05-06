@@ -48,10 +48,32 @@ def _get_collection():
     if _collection is None:
         _client = chromadb.PersistentClient(path=str(config.CHROMA_DIR))
 
-        embedding_fn = GeminiEmbeddingFunction(
-            api_key=config.GEMINI_API_KEY,
-            model_name=config.GEMINI_EMBEDDING_MODEL,
-        )
+        # Try Gemini embeddings first; fall back to ChromaDB's built-in
+        # local sentence-transformer model (no API key needed) if unavailable.
+        embedding_fn = None
+        if config.GEMINI_API_KEY:
+            try:
+                test_client = genai.Client(api_key=config.GEMINI_API_KEY)
+                test_client.models.embed_content(
+                    model=config.GEMINI_EMBEDDING_MODEL,
+                    contents=["test"],
+                )
+                embedding_fn = GeminiEmbeddingFunction(
+                    api_key=config.GEMINI_API_KEY,
+                    model_name=config.GEMINI_EMBEDDING_MODEL,
+                )
+                logger.info("Vector store: using Gemini embeddings")
+            except Exception as e:
+                logger.warning(
+                    f"Gemini embeddings unavailable ({e.__class__.__name__}), "
+                    "falling back to local sentence-transformer embeddings"
+                )
+
+        # Fall back to ChromaDB's built-in local embedding function
+        if embedding_fn is None:
+            from chromadb.utils.embedding_functions import DefaultEmbeddingFunction
+            embedding_fn = DefaultEmbeddingFunction()
+            logger.info("Vector store: using local DefaultEmbeddingFunction (all-MiniLM-L6-v2)")
 
         _collection = _client.get_or_create_collection(
             name=config.CHROMA_COLLECTION_NAME,

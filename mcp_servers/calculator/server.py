@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import sys
 from pathlib import Path
 
@@ -41,36 +42,73 @@ mcp = FastMCP(
 
 # ── helpers ────────────────────────────────────────────────────────────────
 
+def _clean_number_str(s: str) -> str:
+    """Remove 'tons', 'GT', spaces-within-numbers, commas so '2 000 tons' → '2000'."""
+    s = re.sub(r'\btons?\b', '', s, flags=re.IGNORECASE)
+    s = re.sub(r'\bGT\b', '', s, flags=re.IGNORECASE)
+    s = re.sub(r'\bplus\b', '', s, flags=re.IGNORECASE)
+    # Remove spaces that are surrounded by digits (thousand separators)
+    s = re.sub(r'(\d)\s+(\d)', r'\1\2', s)
+    s = s.replace(',', '').strip()
+    return s
+
+
 def _parse_band(band_str: str) -> tuple[float, float | None]:
     """
     Parse a tonnage band string into (floor, ceiling) GT values.
 
-    Examples:
-      'Up to 2000'      → (0, 2000)
-      '2001-10000'      → (2001, 10000)
-      '10001-20000'     → (10001, 20000)
-      '100001 and above' → (100001, None)
-      'All vessels'     → (0, None)
+    Handles formats like:
+      'Up to 2000'            → (0, 2000)
+      'Up to 2 000 tons'      → (0, 2000)
+      '2 000 - 10 000 tons'   → (2000, 10000)
+      '10 001 - 50 000 tons Plus' → (10001, 50000)
+      '100001 and above'      → (100001, None)
+      'All vessels'           → (0, None)
+    Descriptive strings (e.g. 'Basic Fee Per Service') return (0, None) as
+    a catch-all so the row matches any vessel.
     """
-    s = band_str.strip().lower()
+    s = _clean_number_str(band_str).strip().lower()
 
     if s in ("all vessels", "all", ""):
         return (0.0, None)
 
     if s.startswith("up to"):
-        ceiling = float(s.replace("up to", "").strip().replace(",", ""))
-        return (0.0, ceiling)
+        try:
+            ceiling = float(_clean_number_str(s.replace("up to", "").strip()))
+            return (0.0, ceiling)
+        except ValueError:
+            pass
 
-    if "and above" in s or "above" in s:
-        floor = float(s.replace("and above", "").replace("above", "").strip().replace(",", ""))
-        return (floor, None)
+    if "and above" in s or s.endswith("above"):
+        try:
+            floor = float(_clean_number_str(
+                s.replace("and above", "").replace("above", "").strip()
+            ))
+            return (floor, None)
+        except ValueError:
+            pass
 
     if "-" in s:
-        parts = s.replace(",", "").split("-")
-        return (float(parts[0].strip()), float(parts[1].strip()))
+        # Check original band_str for "plus" BEFORE cleaning strips it
+        open_ended = bool(re.search(r'\bplus\b', band_str, re.IGNORECASE))
+        parts = s.split("-")
+        try:
+            lo = float(_clean_number_str(parts[0]))
+            if open_ended:
+                return (lo, None)
+            hi = float(_clean_number_str(parts[1]))
+            return (lo, hi)
+        except (ValueError, IndexError):
+            pass
 
-    # Single number — treat as exact band (fallback)
-    return (float(s.replace(",", "")), None)
+    # Try parsing as a plain number
+    try:
+        return (float(s), None)
+    except ValueError:
+        pass
+
+    # Descriptive string (e.g. "Basic Fee Per Service") — treat as catch-all
+    return (0.0, None)
 
 
 def _find_band_row(rows: list[dict], gt: float, port_key: str) -> dict | None:
@@ -255,24 +293,55 @@ def calculate_pilotage(
         pk = _port_key(port_name)
 
         base_row = _find_band_row(rows, gt, pk)
+
+        # Pilotage often uses "Basic Fee Per Service" + "Per 100 tons" rows
+        # instead of GT bands. Detect and handle both formats.
         if base_row is None:
-            return json.dumps({"error": f"No tonnage band found for GT={gt} at '{port_name}'."})
+            # Look for a "basic fee" or "flat fee" row
+            base_row = next(
+                (r for r in rows
+                 if not r.get("is_incremental")
+                 and pk in (r.get("values") or {})
+                 and any(kw in (r.get("tonnage_band") or "").lower()
+                         for kw in ("basic", "flat", "per service", "fee per"))),
+                None,
+            )
+            # Fallback: first non-incremental row with this port
+            if base_row is None:
+                base_row = next(
+                    (r for r in rows
+                     if not r.get("is_incremental") and pk in (r.get("values") or {})),
+                    None,
+                )
+
+        if base_row is None:
+            return json.dumps({"error": f"No pilotage base row found for '{port_name}'."})
 
         base_fee = base_row["values"][pk]
         band = base_row.get("tonnage_band", "")
         band_floor, _ = _parse_band(band)
 
+        # Find incremental row — either via parent_band match or "per 100 tons" keyword
         inc_row = _find_incremental_row(rows, band, pk)
+        if inc_row is None:
+            inc_row = next(
+                (r for r in rows
+                 if pk in (r.get("values") or {})
+                 and "100" in (r.get("tonnage_band") or "").lower()),
+                None,
+            )
+
         incremental_charge = 0.0
-        incremental_detail = "no incremental row for this band"
+        incremental_detail = "no incremental row"
 
         if inc_row is not None:
             inc_rate = inc_row["values"][pk]
-            excess_gt = max(0.0, gt - band_floor)
+            # If band_floor is 0 (descriptive band), incremental applies to full GT
+            excess_gt = gt if band_floor == 0.0 else max(0.0, gt - band_floor)
             units = math.ceil(excess_gt / 100.0)
             incremental_charge = units * inc_rate
             incremental_detail = (
-                f"ceil(({gt} - {band_floor}) / 100) × R{inc_rate} "
+                f"ceil({excess_gt} / 100) × R{inc_rate} "
                 f"= {units} × R{inc_rate} = R{incremental_charge:.2f}"
             )
 
@@ -407,7 +476,15 @@ def calculate_port_dues(
 
         rate = row["values"][pk]
         unit = row.get("unit", "per_GT")
-        charge = gt * rate
+        band = (row.get("tonnage_band") or "").lower()
+
+        # Port dues can be per GT or per 100 GT — detect from unit/band string
+        if "100" in band or "100" in unit:
+            charge = (gt / 100.0) * rate
+            formula = f"({gt} GT / 100) × R{rate}/100GT = R{charge:.2f}"
+        else:
+            charge = gt * rate
+            formula = f"{gt} GT × R{rate}/GT = R{charge:.2f}"
 
         return json.dumps({
             "charge_type": "port_dues",
@@ -415,7 +492,7 @@ def calculate_port_dues(
             "gt": gt,
             "rate": rate,
             "unit": unit,
-            "formula": f"{gt} GT × R{rate}/GT = R{charge:.2f}",
+            "formula": formula,
             "charge_zar": round(charge, 2),
         })
     except Exception as e:
@@ -516,6 +593,7 @@ def calculate_berth_dues(
 
         row = _find_band_row(rows, gt, pk)
         if row is None:
+            # Berth dues may use "Per 100 tons" flat rate rows
             row = next((r for r in rows if not r.get("is_incremental") and pk in (r.get("values") or {})), None)
 
         if row is None:
@@ -523,11 +601,23 @@ def calculate_berth_dues(
 
         rate = row["values"][pk]
         unit = row.get("unit", "per_24h")
+        band = (row.get("tonnage_band") or "").lower()
 
         # Minimum 24 hours
         billable_hours = max(24.0, hours_alongside)
         periods = billable_hours / 24.0
-        charge = gt * rate * periods
+
+        # Berth dues can be per GT or per 100 GT — detect from band/unit
+        if "100" in band or "100" in unit:
+            units_of_100gt = gt / 100.0
+            charge = units_of_100gt * rate * periods
+            formula = (
+                f"({gt} GT / 100) × R{rate}/100GT × {round(periods,4)} periods"
+                f" = R{charge:.2f}"
+            )
+        else:
+            charge = gt * rate * periods
+            formula = f"{gt} GT × R{rate}/24h × {round(periods,4)} periods = R{charge:.2f}"
 
         return json.dumps({
             "charge_type": "berth_dues",
@@ -538,7 +628,7 @@ def calculate_berth_dues(
             "hours_alongside": hours_alongside,
             "billable_hours": billable_hours,
             "periods_24h": round(periods, 4),
-            "formula": f"{gt} GT × R{rate}/24h × {round(periods,4)} periods = R{charge:.2f}",
+            "formula": formula,
             "charge_zar": round(charge, 2),
         })
     except Exception as e:
@@ -574,6 +664,18 @@ def calculate_running_of_lines(
             (r for r in rows if not r.get("is_incremental") and pk in (r.get("values") or {})),
             None,
         )
+
+        # Fall back to "other_ports" catch-all if port not explicitly listed
+        if row is None:
+            row = next(
+                (r for r in rows
+                 if not r.get("is_incremental")
+                 and "other" in (r.get("port") or "").lower()
+                 and "other_ports" in (r.get("values") or {})),
+                None,
+            )
+            if row:
+                pk = "other_ports"  # use the other_ports rate
 
         if row is None:
             return json.dumps({"error": f"No running of lines row for '{port_name}'."})

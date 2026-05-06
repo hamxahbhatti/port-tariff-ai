@@ -1,6 +1,13 @@
 import os
 from pathlib import Path
 
+# Load .env from repo root (if present) so GEMINI_API_KEY works without exporting
+try:
+    from dotenv import load_dotenv
+    load_dotenv(Path(__file__).parent / ".env", override=False)
+except ImportError:
+    pass  # python-dotenv not installed — rely on shell env
+
 # ── Paths ──────────────────────────────────────────────────────────────────
 ROOT_DIR = Path(__file__).parent
 DATA_DIR = ROOT_DIR / "data"
@@ -23,6 +30,14 @@ PDF_RENDER_DPI = 200
 
 # How similar two VLM passes must be to be considered matching (0-1)
 VLM_MATCH_THRESHOLD = 0.95
+
+# Delay (seconds) between Vision API calls.
+# Free tier (20 req/min): set to 7. Paid tier: set to 1 or 0.
+# Override via env: VISION_DELAY=1
+INTER_REQUEST_DELAY = float(os.getenv("VISION_DELAY", "2"))
+
+VISION_CACHE_DIR = DATA_DIR / "vision_cache"
+VISION_CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 # Max tokens per prose chunk stored in ChromaDB
 CHUNK_SIZE = 800

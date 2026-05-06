@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Port Tariff AI — Conversational Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-brand">
+    <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+         stroke-linecap="round" stroke-linejoin="round">
+      <path d="M2 20 18 20M5 20 5 11 12 4 19 11 19 20M9 20 9 15 12 15 12 20"/>
+      <path d="M5 11 2 14M19 11 22 14"/>
+    </svg>
+    <div class="brand-text">
+      <span class="brand-name">Port Tariff AI</span>
+      <span class="brand-sub">Transnet National Ports Authority</span>
+    </div>
+  </div>
+
+  <nav class="header-nav">
+    <span class="nav-badge">Durban · 2024/25 Tariff</span>
+    <button class="btn-ghost" onclick="newChat()" title="Start a new conversation">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 5v14M5 12h14"/>
+      </svg>
+      New Chat
+    </button>
+    <button class="debug-toggle" id="debugToggle" onclick="toggleDebug()">
+      <span class="debug-dot"></span>
+      Debug
+    </button>
+  </nav>
+</header>
+
+<!-- ── Chat Layout ────────────────────────────────────────────────────── -->
+<div class="chat-layout" id="layout">
+
+  <!-- Messages Area -->
+  <div class="messages-area" id="messagesArea">
+    <div class="messages-inner" id="messagesInner">
+
+      <!-- Welcome State -->
+      <div class="welcome" id="welcomeState">
+        <div class="welcome-icon">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8 48 56 48M12 48 12 28 32 12 52 28 52 48M22 48 22 36 32 36 32 48"/>
+            <path d="M12 28 4 36M52 28 60 36"/>
+          </svg>
+        </div>
+        <h1 class="welcome-title">Port Dues Calculator</h1>
+        <p class="welcome-desc">
+          Tell me about your vessel and I'll calculate all applicable Transnet port charges.
+          I'll ask follow-up questions if any details are missing.
+        </p>
+        <div class="suggestions">
+          <button class="suggestion-chip" onclick="useSuggestion(this)">
+            Calculate dues for a 51,300 GT bulk carrier at Durban carrying 75,000 MT iron ore for 48 hours
+          </button>
+          <button class="suggestion-chip" onclick="useSuggestion(this)">
+            What's the pilotage fee for a 25,000 GT tanker at Durban?
+          </button>
+          <button class="suggestion-chip" onclick="useSuggestion(this)">
+            I have a 42,000 GT container vessel — how much will 3 days at berth cost?
+          </button>
+          <button class="suggestion-chip" onclick="useSuggestion(this)">
+            What are the VTS and light dues for a general cargo vessel?
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Input Bar -->
+  <div class="input-bar">
+    <div class="input-wrapper">
+      <textarea
+        id="chatInput"
+        placeholder="Ask about port dues, tariff rates, or vessel charges…"
+        rows="1"
+        maxlength="2000"
+      ></textarea>
+    </div>
+    <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled title="Send (Enter)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="22" y1="2" x2="11" y2="13"/>
+        <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+      </svg>
+    </button>
+  </div>
+
+</div>
+
+<!-- ── Debug Panel ────────────────────────────────────────────────────── -->
+<div class="debug-panel" id="debugPanel">
+  <div class="debug-handle" onclick="toggleDebug()">
+    <div class="debug-title">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+           stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/>
+      </svg>
+      Execution Trace
+      <span class="debug-step-count" id="debugStepCount">0 steps</span>
+    </div>
+    <div class="debug-handle-actions">
+      <button class="debug-clear" onclick="clearDebug(event)">Clear</button>
+      <svg class="debug-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="18 15 12 9 6 15"/>
+      </svg>
+    </div>
+  </div>
+  <div class="debug-body">
+    <div class="debug-empty" id="debugEmpty">
+      No trace yet — start a conversation to see the execution steps.
+    </div>
+    <div class="debug-steps" id="debugSteps"></div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
