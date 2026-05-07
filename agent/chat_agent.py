@@ -1,15 +1,12 @@
 """
 Conversational port tariff agent with memory.
 
-Uses the full LangGraph tool set (17 tools) so the agent can answer both
-calculation requests and rule/exemption/policy questions via ChromaDB.
-Session memory is maintained per session_id in an in-process dict.
+Uses the full 17-tool set (same as tariff_agent) so the agent can answer
+both calculation requests and rule/exemption/policy questions via ChromaDB.
+Tools are imported lazily inside each wrapper to avoid module-level
+initialisation issues in the Railway async environment.
 
-Tools available (same set as tariff_agent):
-  Rules Engine  — determine_applicable_charges, check_exemptions, get_vessel_charge_plan
-  Tariff RAG    — get_tariff_table, list_available_charges, search_rules (ChromaDB)
-  Calculator    — 8 deterministic charge functions + aggregate_charges
-  Vessel        — register_vessel, classify_vessel_for_tariff
+Session memory is maintained per session_id in an in-process dict.
 """
 
 from __future__ import annotations
@@ -19,10 +16,10 @@ import logging
 from typing import Generator
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
+from langchain_core.tools import StructuredTool
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import config
-from agent.tariff_agent import AGENT_TOOLS, TOOL_BY_NAME
 
 logger = logging.getLogger(__name__)
 
@@ -62,6 +59,144 @@ RESPONSE FORMAT:
 - Never estimate or invent a tariff rate or rule.
 
 Supported ports: Durban (Richards Bay, Cape Town and others coming soon)."""
+
+
+# ── Tool wrappers (lazy imports keep module load lightweight) ──────────────
+
+def _st(fn) -> StructuredTool:
+    return StructuredTool.from_function(func=fn)
+
+
+def get_vessel_charge_plan(vessel_profile_json: str) -> str:
+    """Get the full charge plan and modifiers for a vessel at a port."""
+    from mcp_servers.rules_engine.server import get_vessel_charge_plan as _fn
+    return _fn(vessel_profile_json)
+
+
+def determine_applicable_charges(vessel_profile_json: str) -> str:
+    """Determine which charges apply to a vessel at a given South African port."""
+    from mcp_servers.rules_engine.server import determine_applicable_charges as _fn
+    return _fn(vessel_profile_json)
+
+
+def check_exemptions(vessel_profile_json: str) -> str:
+    """Check whether any exemptions apply to a vessel."""
+    from mcp_servers.rules_engine.server import check_exemptions as _fn
+    return _fn(vessel_profile_json)
+
+
+def get_tariff_table(port_name: str, charge_type: str) -> str:
+    """Retrieve the exact numeric rate rows for a charge type at a port."""
+    from mcp_servers.tariff_rag.server import get_tariff_table as _fn
+    return _fn(port_name, charge_type)
+
+
+def list_available_charges(port_name: str) -> str:
+    """List all charge types available in the tariff store for a port."""
+    from mcp_servers.tariff_rag.server import list_available_charges as _fn
+    return _fn(port_name)
+
+
+def search_rules(question: str, port_name: str | None = None) -> str:
+    """
+    Semantic search over port tariff rules, exemptions, conditions,
+    and table descriptions. Use this for any policy or exemption question.
+    """
+    from mcp_servers.tariff_rag.server import search_rules as _fn
+    return _fn(question, port_name)
+
+
+def register_vessel(vessel_profile_json: str) -> str:
+    """Register and validate a vessel profile."""
+    from mcp_servers.vessel.server import register_vessel as _fn
+    return _fn(vessel_profile_json)
+
+
+def classify_vessel_for_tariff(vessel_profile_json: str) -> str:
+    """Classify a vessel type and GT band for tariff purposes."""
+    from mcp_servers.vessel.server import classify_vessel_for_tariff as _fn
+    return _fn(vessel_profile_json)
+
+
+def calculate_light_dues(rows_json: str, gt: float, port: str) -> str:
+    """Calculate light dues for a vessel."""
+    from mcp_servers.calculator.server import calculate_light_dues as _fn
+    return _fn(rows_json, gt, port)
+
+
+def calculate_vts(rows_json: str, gt: float, port: str) -> str:
+    """Calculate Vessel Traffic Services dues."""
+    from mcp_servers.calculator.server import calculate_vts as _fn
+    return _fn(rows_json, gt, port)
+
+
+def calculate_pilotage(rows_json: str, gt: float, port: str, movements: int = 2) -> str:
+    """Calculate pilotage dues for a vessel."""
+    from mcp_servers.calculator.server import calculate_pilotage as _fn
+    return _fn(rows_json, gt, port, movements)
+
+
+def calculate_tug_assistance(rows_json: str, gt: float, port: str,
+                              tug_count: int = 3, movements: int = 2) -> str:
+    """Calculate tug assistance dues."""
+    from mcp_servers.calculator.server import calculate_tug_assistance as _fn
+    return _fn(rows_json, gt, port, tug_count, movements)
+
+
+def calculate_port_dues(rows_json: str, gt: float, port: str) -> str:
+    """Calculate port dues for a vessel."""
+    from mcp_servers.calculator.server import calculate_port_dues as _fn
+    return _fn(rows_json, gt, port)
+
+
+def calculate_cargo_dues(rows_json: str, cargo_mt: float,
+                          cargo_type: str, port: str) -> str:
+    """Calculate cargo dues based on metric tonnes and cargo type."""
+    from mcp_servers.calculator.server import calculate_cargo_dues as _fn
+    return _fn(rows_json, cargo_mt, cargo_type, port)
+
+
+def calculate_berth_dues(rows_json: str, gt: float, port: str,
+                          hours_alongside: float = 24) -> str:
+    """Calculate berth dues for a vessel."""
+    from mcp_servers.calculator.server import calculate_berth_dues as _fn
+    return _fn(rows_json, gt, port, hours_alongside)
+
+
+def calculate_running_of_lines(rows_json: str, port: str,
+                                 services: int = 2) -> str:
+    """Calculate running of lines charge."""
+    from mcp_servers.calculator.server import calculate_running_of_lines as _fn
+    return _fn(rows_json, port, services)
+
+
+def aggregate_charges(charges_json: str) -> str:
+    """Aggregate all calculated charges into a final total."""
+    from mcp_servers.calculator.server import aggregate_charges as _fn
+    return _fn(charges_json)
+
+
+AGENT_TOOLS = [
+    _st(get_vessel_charge_plan),
+    _st(determine_applicable_charges),
+    _st(check_exemptions),
+    _st(get_tariff_table),
+    _st(list_available_charges),
+    _st(search_rules),
+    _st(register_vessel),
+    _st(classify_vessel_for_tariff),
+    _st(calculate_light_dues),
+    _st(calculate_vts),
+    _st(calculate_pilotage),
+    _st(calculate_tug_assistance),
+    _st(calculate_port_dues),
+    _st(calculate_cargo_dues),
+    _st(calculate_berth_dues),
+    _st(calculate_running_of_lines),
+    _st(aggregate_charges),
+]
+
+TOOL_BY_NAME = {t.name: t for t in AGENT_TOOLS}
 
 
 # ── Agent class ───────────────────────────────────────────────────────────
@@ -114,7 +249,6 @@ class ChatAgent:
         """
         llm = self._get_llm()
 
-        # Build message list from history + new message
         msgs: list = [SystemMessage(content=SYSTEM_PROMPT)]
         for h in history:
             if h["role"] == "user":
