@@ -4,7 +4,7 @@ __pycache__
 *.pyc
 *.pyo
 .env
-data/chroma_db/
+# data/chroma_db/ intentionally included — pre-built RAG vector index for Railway
 tests/
 ingestion/
 .claude/
