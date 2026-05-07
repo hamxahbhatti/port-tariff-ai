@@ -1,0 +1,23 @@
+# Runtime dependencies only — no ingestion stack needed.
+# The tariff data was extracted locally and committed to the repo
+# (data/tariffs/durban/). Railway reads those JSON files directly.
+
+# Agent orchestration
+langgraph>=0.2.0
+langchain-core>=0.3.0
+langchain-google-genai>=2.0.0
+
+# MCP servers
+fastmcp>=2.0.0
+
+# API
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+
+# Vector store (used for semantic search over prose sections)
+chromadb>=0.5.0
+
+# Utilities
+pydantic>=2.7.0
+python-dotenv>=1.0.0
+tenacity>=8.3.0
