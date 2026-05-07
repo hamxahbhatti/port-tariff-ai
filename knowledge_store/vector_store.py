@@ -19,7 +19,6 @@ from chromadb.api.types import Documents, Embeddings, EmbeddingFunction
 from google import genai
 
 import config
-from ingestion.docling_parser import ProseChunk
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +83,7 @@ def _get_collection():
     return _collection
 
 
-def save_prose_chunks(port_name: str, chunks: list[ProseChunk]) -> int:
+def save_prose_chunks(port_name: str, chunks: list) -> int:
     if not chunks:
         return 0
 

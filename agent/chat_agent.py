@@ -1,12 +1,14 @@
 """
 Conversational port tariff agent with memory.
 
-Uses the full 17-tool set (same as tariff_agent) so the agent can answer
-both calculation requests and rule/exemption/policy questions via ChromaDB.
-Tools are imported lazily inside each wrapper to avoid module-level
-initialisation issues in the Railway async environment.
+Three tools exposed to the LLM:
+  - determine_applicable_charges  (rules engine)
+  - calculate_all_dues            (full deterministic calculation — orchestrates all 8 calculators internally)
+  - search_rules                  (ChromaDB semantic search for prose/exemption/policy questions)
 
-Session memory is maintained per session_id in an in-process dict.
+The calculate_all_dues tool handles all arithmetic internally so the LLM never
+needs to orchestrate individual calculator tools — keeps the model surface small
+and prevents looping.
 """
 
 from __future__ import annotations
@@ -16,7 +18,7 @@ import logging
 from typing import Generator
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
-from langchain_core.tools import StructuredTool
+from langchain_core.tools import tool
 from langchain_google_genai import ChatGoogleGenerativeAI
 
 import config
@@ -30,7 +32,7 @@ You help shipping agents and vessel operators with two types of requests:
 
 1. CALCULATIONS — calculating exact port dues for a vessel call at a South African port.
 2. RULE / POLICY QUESTIONS — answering questions about exemptions, conditions, surcharges,
-   special vessel categories, and how charges work, using the official tariff rules.
+   special vessel categories, and how charges work.
 
 CONVERSATION RULES:
 - Extract vessel parameters from what the user tells you (name, type, GT, port, cargo, berth hours).
@@ -43,195 +45,172 @@ CONVERSATION RULES:
 
 TOOL USAGE:
 For calculations:
-  1. Call get_vessel_charge_plan to get the applicable charges and modifiers.
-  2. For each charge: call get_tariff_table then the matching calculate_* tool.
-  3. Call aggregate_charges at the end to sum the result.
+  1. Call determine_applicable_charges first to see which charges apply.
+  2. Then call calculate_all_dues with the full vessel details.
+  3. Never call these tools more than once per user message.
 
 For rule / policy / exemption questions:
-  - Call search_rules with a clear natural-language query to retrieve relevant tariff prose.
-  - If search_rules returns results, use those passages to answer accurately.
-  - If search_rules returns no results, say clearly that the specific rule or exemption
-    is not documented in the indexed tariff content for that port, and explain what
-    the standard rule is if you know it (e.g. pilotage is compulsory above 500 GT).
-  - Never say the tools lack functionality — search_rules works but the tariff document
-    may simply not contain a specific exemption for that category.
+  - Call search_rules with a clear natural-language query.
+  - If results are returned, answer from those passages.
+  - If no results are returned, say the specific rule is not documented in the indexed
+    tariff content, and state the standard rule if known (e.g. pilotage is compulsory
+    above 500 GT for all commercial vessels).
+  - Never say the tools lack functionality.
 
 RESPONSE FORMAT:
 - Be concise and professional.
-- For calculations: give a brief summary then present the line-item breakdown.
+- For calculations: brief summary then the line-item breakdown.
 - For rule questions: answer directly from the retrieved passages.
 - Never estimate or invent a tariff rate or rule.
+- If a port is not yet supported, say so clearly.
 
 Supported ports: Durban (Richards Bay, Cape Town and others coming soon)."""
 
 
-# ── Tool wrappers (lazy imports keep module load lightweight) ──────────────
+# ── Tools ─────────────────────────────────────────────────────────────────
 
-def _st(fn) -> StructuredTool:
-    return StructuredTool.from_function(func=fn)
-
-
-def get_vessel_charge_plan(vessel_profile_json: str) -> str:
-    """Get the full charge plan and modifiers for a vessel at a port."""
-    from mcp_servers.rules_engine.server import get_vessel_charge_plan as _fn
-    return _fn(vessel_profile_json)
-
-
-def determine_applicable_charges(vessel_profile_json: str) -> str:
-    """Determine which charges apply to a vessel at a given South African port."""
-    from mcp_servers.rules_engine.server import determine_applicable_charges as _fn
-    return _fn(vessel_profile_json)
-
-
-def check_exemptions(vessel_profile_json: str) -> str:
-    """Check whether any exemptions apply to a vessel."""
-    from mcp_servers.rules_engine.server import check_exemptions as _fn
-    return _fn(vessel_profile_json)
-
-
-def get_tariff_table(port_name: str, charge_type: str) -> str:
-    """Retrieve the exact numeric rate rows for a charge type at a port."""
-    from mcp_servers.tariff_rag.server import get_tariff_table as _fn
-    return _fn(port_name, charge_type)
-
-
-def list_available_charges(port_name: str) -> str:
-    """List all charge types available in the tariff store for a port."""
-    from mcp_servers.tariff_rag.server import list_available_charges as _fn
-    return _fn(port_name)
-
-
-def search_rules(question: str, port_name: str | None = None) -> str:
+@tool
+def determine_applicable_charges(
+    vessel_type: str,
+    gt: float,
+    port: str,
+    has_cargo: bool = True,
+    requesting_berth: bool = True,
+) -> str:
     """
-    Semantic search over port tariff rules, exemptions, conditions,
-    and table descriptions. Use this for any policy or exemption question.
+    Determine which charges apply to a vessel at a given South African port.
+
+    Args:
+        vessel_type: bulk_carrier | tanker | container | general_cargo | ro_ro | passenger
+        gt: Gross Tonnage of the vessel
+        port: Port name (e.g. 'durban')
+        has_cargo: True if cargo is being loaded or discharged
+        requesting_berth: True if vessel is going alongside a berth
+    """
+    from mcp_servers.rules_engine.server import determine_applicable_charges as _fn
+    profile = {
+        "name": "vessel", "vessel_type": vessel_type, "gt": gt,
+        "loa_m": 200, "port": port, "cargo_operation": has_cargo,
+        "cargo_type": "", "cargo_mt": 0, "berthing": requesting_berth,
+        "hours_alongside": 24, "in_distress": False,
+    }
+    return _fn(json.dumps(profile))
+
+
+@tool
+def calculate_all_dues(
+    vessel_type: str,
+    gt: float,
+    port: str,
+    cargo_type: str = "",
+    cargo_mt: float = 0,
+    hours_alongside: float = 24,
+    loa_m: float = 200,
+) -> str:
+    """
+    Calculate all applicable port dues for a vessel. Returns a complete breakdown
+    with each charge type, formula, and total in ZAR.
+
+    Args:
+        vessel_type: bulk_carrier | tanker | container | general_cargo | ro_ro | passenger
+        gt: Gross Tonnage
+        port: Port name (e.g. 'durban')
+        cargo_type: Cargo description (e.g. 'iron_ore', 'coal', 'containers') — empty if no cargo
+        cargo_mt: Cargo in metric tonnes — 0 if no cargo
+        hours_alongside: Hours the vessel will spend at berth
+        loa_m: Length Overall in metres
+    """
+    from knowledge_store.tariff_store import load_table
+    from mcp_servers.calculator.server import (
+        calculate_berth_dues, calculate_cargo_dues, calculate_light_dues,
+        calculate_pilotage, calculate_port_dues, calculate_running_of_lines,
+        calculate_tug_assistance, calculate_vts,
+    )
+    from mcp_servers.rules_engine.server import determine_applicable_charges as _rules
+
+    has_cargo = bool(cargo_mt > 0 and cargo_type.strip())
+    profile = {
+        "name": "vessel", "vessel_type": vessel_type, "gt": gt, "loa_m": loa_m,
+        "port": port, "cargo_operation": has_cargo, "cargo_type": cargo_type,
+        "cargo_mt": cargo_mt, "berthing": True, "hours_alongside": hours_alongside,
+        "in_distress": False,
+    }
+    plan = json.loads(_rules(json.dumps(profile)))
+    applicable = plan.get("applicable_charges", [])
+    modifiers = plan.get("modifiers", {})
+
+    CALCS = {
+        "light_dues":       lambda r, p: calculate_light_dues(r, gt, p),
+        "vts":              lambda r, p: calculate_vts(r, gt, p),
+        "pilotage":         lambda r, p: calculate_pilotage(r, gt, p, modifiers.get("pilotage_movements", 2)),
+        "tug_assistance":   lambda r, p: calculate_tug_assistance(r, gt, p, modifiers.get("tug_count", 3), modifiers.get("tug_movements", 2)),
+        "port_dues":        lambda r, p: calculate_port_dues(r, gt, p),
+        "cargo_dues":       lambda r, p: calculate_cargo_dues(r, cargo_mt, cargo_type, p),
+        "berth_dues":       lambda r, p: calculate_berth_dues(r, gt, p, hours_alongside),
+        "running_of_lines": lambda r, p: calculate_running_of_lines(r, p, 2),
+    }
+
+    results, errors = [], []
+    for charge in applicable:
+        table = load_table(port, charge)
+        if not table:
+            errors.append({"charge_type": charge, "error": "No tariff table found"})
+            continue
+        calc_fn = CALCS.get(charge)
+        if not calc_fn:
+            continue
+        try:
+            r = json.loads(calc_fn(json.dumps(table.get("rows", [])), port))
+            if "error" in r:
+                errors.append({"charge_type": charge, "error": r["error"]})
+            else:
+                results.append({"charge_type": charge, "charge_zar": r.get("charge_zar", 0), "formula": r.get("formula", "")})
+        except Exception as e:
+            errors.append({"charge_type": charge, "error": str(e)})
+
+    total = sum(r["charge_zar"] for r in results)
+    return json.dumps({
+        "success": True, "port": port, "vessel_type": vessel_type, "gt": gt,
+        "cargo_type": cargo_type, "cargo_mt": cargo_mt, "hours_alongside": hours_alongside,
+        "total_zar": round(total, 2), "line_items": results, "errors": errors,
+    })
+
+
+@tool
+def search_rules(question: str, port_name: str = "durban") -> str:
+    """
+    Semantic search over the port tariff rules, exemptions, conditions, and
+    table descriptions stored in ChromaDB. Use this for any question about
+    policy, exemptions, surcharges, or how a charge works.
+
+    Args:
+        question: Natural-language question about tariff rules or exemptions
+        port_name: Port to search (default 'durban')
     """
     from mcp_servers.tariff_rag.server import search_rules as _fn
     return _fn(question, port_name)
 
 
-def register_vessel(vessel_profile_json: str) -> str:
-    """Register and validate a vessel profile."""
-    from mcp_servers.vessel.server import register_vessel as _fn
-    return _fn(vessel_profile_json)
+# ── Agent ─────────────────────────────────────────────────────────────────
 
+TOOLS = [determine_applicable_charges, calculate_all_dues, search_rules]
+TOOL_MAP = {t.name: t for t in TOOLS}
 
-def classify_vessel_for_tariff(vessel_profile_json: str) -> str:
-    """Classify a vessel type and GT band for tariff purposes."""
-    from mcp_servers.vessel.server import classify_vessel_for_tariff as _fn
-    return _fn(vessel_profile_json)
-
-
-def calculate_light_dues(rows_json: str, gt: float, port: str) -> str:
-    """Calculate light dues for a vessel."""
-    from mcp_servers.calculator.server import calculate_light_dues as _fn
-    return _fn(rows_json, gt, port)
-
-
-def calculate_vts(rows_json: str, gt: float, port: str) -> str:
-    """Calculate Vessel Traffic Services dues."""
-    from mcp_servers.calculator.server import calculate_vts as _fn
-    return _fn(rows_json, gt, port)
-
-
-def calculate_pilotage(rows_json: str, gt: float, port: str, movements: int = 2) -> str:
-    """Calculate pilotage dues for a vessel."""
-    from mcp_servers.calculator.server import calculate_pilotage as _fn
-    return _fn(rows_json, gt, port, movements)
-
-
-def calculate_tug_assistance(rows_json: str, gt: float, port: str,
-                              tug_count: int = 3, movements: int = 2) -> str:
-    """Calculate tug assistance dues."""
-    from mcp_servers.calculator.server import calculate_tug_assistance as _fn
-    return _fn(rows_json, gt, port, tug_count, movements)
-
-
-def calculate_port_dues(rows_json: str, gt: float, port: str) -> str:
-    """Calculate port dues for a vessel."""
-    from mcp_servers.calculator.server import calculate_port_dues as _fn
-    return _fn(rows_json, gt, port)
-
-
-def calculate_cargo_dues(rows_json: str, cargo_mt: float,
-                          cargo_type: str, port: str) -> str:
-    """Calculate cargo dues based on metric tonnes and cargo type."""
-    from mcp_servers.calculator.server import calculate_cargo_dues as _fn
-    return _fn(rows_json, cargo_mt, cargo_type, port)
-
-
-def calculate_berth_dues(rows_json: str, gt: float, port: str,
-                          hours_alongside: float = 24) -> str:
-    """Calculate berth dues for a vessel."""
-    from mcp_servers.calculator.server import calculate_berth_dues as _fn
-    return _fn(rows_json, gt, port, hours_alongside)
-
-
-def calculate_running_of_lines(rows_json: str, port: str,
-                                 services: int = 2) -> str:
-    """Calculate running of lines charge."""
-    from mcp_servers.calculator.server import calculate_running_of_lines as _fn
-    return _fn(rows_json, port, services)
-
-
-def aggregate_charges(charges_json: str) -> str:
-    """Aggregate all calculated charges into a final total."""
-    from mcp_servers.calculator.server import aggregate_charges as _fn
-    return _fn(charges_json)
-
-
-def _build_tools():
-    """Build tool list lazily — called once on first agent use."""
-    tools = [
-        _st(get_vessel_charge_plan),
-        _st(determine_applicable_charges),
-        _st(check_exemptions),
-        _st(get_tariff_table),
-        _st(list_available_charges),
-        _st(search_rules),
-        _st(register_vessel),
-        _st(classify_vessel_for_tariff),
-        _st(calculate_light_dues),
-        _st(calculate_vts),
-        _st(calculate_pilotage),
-        _st(calculate_tug_assistance),
-        _st(calculate_port_dues),
-        _st(calculate_cargo_dues),
-        _st(calculate_berth_dues),
-        _st(calculate_running_of_lines),
-        _st(aggregate_charges),
-    ]
-    return tools, {t.name: t for t in tools}
-
-
-_TOOLS: list | None = None
-_TOOL_BY_NAME: dict | None = None
-
-
-def _get_tools():
-    global _TOOLS, _TOOL_BY_NAME
-    if _TOOLS is None:
-        _TOOLS, _TOOL_BY_NAME = _build_tools()
-    return _TOOLS, _TOOL_BY_NAME
-
-
-# ── Agent class ───────────────────────────────────────────────────────────
 
 class ChatAgent:
-    """Conversational agent with per-session memory and full tool access."""
+    """Conversational agent with per-session memory."""
 
     def __init__(self):
         self._llm = None
 
     def _get_llm(self):
         if self._llm is None:
-            tools, _ = _get_tools()
             base = ChatGoogleGenerativeAI(
                 model="models/gemini-2.5-flash-lite",
                 temperature=0,
                 google_api_key=config.GEMINI_API_KEY,
             )
-            self._llm = base.bind_tools(tools)
+            self._llm = base.bind_tools(TOOLS)
         return self._llm
 
     @staticmethod
@@ -248,22 +227,7 @@ class ChatAgent:
             return "The AI model is temporarily unavailable. Please retry in a moment."
         return f"AI model error: {msg[:200]}"
 
-    def run(
-        self,
-        history: list[dict],
-        message: str,
-    ) -> Generator[dict, None, None]:
-        """
-        Run one conversational turn.
-
-        Args:
-            history: Previous turns [{role: user|assistant, content: str}]
-            message: The new user message
-
-        Yields:
-            Debug event dicts with 'type' field.
-            Final event has type='response'.
-        """
+    def run(self, history: list[dict], message: str) -> Generator[dict, None, None]:
         llm = self._get_llm()
 
         msgs: list = [SystemMessage(content=SYSTEM_PROMPT)]
@@ -291,8 +255,7 @@ class ChatAgent:
             return
 
         iteration = 0
-
-        while response.tool_calls and iteration < 20:
+        while response.tool_calls and iteration < 8:
             iteration += 1
             msgs.append(response)
             tool_messages = []
@@ -309,7 +272,7 @@ class ChatAgent:
                     "args": tc["args"],
                 }
 
-                tool_fn = TOOL_BY_NAME.get(tc["name"])
+                tool_fn = TOOL_MAP.get(tc["name"])
                 try:
                     raw = tool_fn.invoke(tc["args"]) if tool_fn else json.dumps({"error": f"Unknown tool: {tc['name']}"})
                 except Exception as tool_exc:
@@ -328,9 +291,7 @@ class ChatAgent:
                     "result": result_data,
                 }
 
-                tool_messages.append(
-                    ToolMessage(content=str(raw), tool_call_id=tc["id"])
-                )
+                tool_messages.append(ToolMessage(content=str(raw), tool_call_id=tc["id"]))
 
             msgs.extend(tool_messages)
 
@@ -349,12 +310,7 @@ class ChatAgent:
                 return
 
         calc_data = _extract_calc(msgs)
-
-        yield {
-            "type": "response",
-            "content": response.content or "",
-            "calc_data": calc_data,
-        }
+        yield {"type": "response", "content": response.content or "", "calc_data": calc_data}
 
 
 def _summarise(tool_name: str, result) -> str:
@@ -363,13 +319,9 @@ def _summarise(tool_name: str, result) -> str:
             n = len(result.get("line_items", []))
             return f"R {result['total_zar']:,.2f} total · {n} charge types calculated"
         if "applicable_charges" in result:
-            charges = result["applicable_charges"]
-            return f"{len(charges)} charges apply: {', '.join(charges)}"
+            return f"{len(result['applicable_charges'])} charges apply: {', '.join(result['applicable_charges'])}"
         if "results" in result:
-            hits = result.get("results", [])
-            return f"{len(hits)} rule passages retrieved from ChromaDB"
-    if isinstance(result, str) and len(result) > 20:
-        return result[:120]
+            return f"{len(result.get('results', []))} rule passages retrieved from ChromaDB"
     return str(result)[:120]
 
 
