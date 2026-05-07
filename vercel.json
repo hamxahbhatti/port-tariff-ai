@@ -2,7 +2,9 @@
   "version": 2,
   "outputDirectory": "frontend",
   "buildCommand": "",
+  "installCommand": "",
   "framework": null,
+  "functions": {},
   "rewrites": [
     { "source": "/static/:file", "destination": "/:file" }
   ]

@@ -1,0 +1,19 @@
+# Exclude all Python backend code — Vercel only serves the static frontend.
+# The API runs on Railway; nothing here should become a Lambda function.
+api/
+agent/
+mcp_servers/
+ingestion/
+knowledge_store/
+data/
+tests/
+config.py
+requirements.txt
+requirements-prod.txt
+*.py
+__pycache__/
+.venv/
+Dockerfile
+.dockerignore
+railway.toml
+nixpacks.toml
