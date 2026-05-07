@@ -12,9 +12,12 @@ from __future__ import annotations
 import json
 import logging
 from pathlib import Path
+from typing import TYPE_CHECKING
 
 from config import TARIFF_STORE_DIR
-from ingestion.vision_extractor import VisionTableResult
+
+if TYPE_CHECKING:
+    from ingestion.vision_extractor import VisionTableResult
 
 logger = logging.getLogger(__name__)
 
