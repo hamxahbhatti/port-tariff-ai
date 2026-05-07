@@ -49,8 +49,12 @@ For calculations:
 
 For rule / policy / exemption questions:
   - Call search_rules with a clear natural-language query to retrieve relevant tariff prose.
-  - Use the returned passages to answer the question accurately.
-  - Do not invent rules — only use what search_rules returns.
+  - If search_rules returns results, use those passages to answer accurately.
+  - If search_rules returns no results, say clearly that the specific rule or exemption
+    is not documented in the indexed tariff content for that port, and explain what
+    the standard rule is if you know it (e.g. pilotage is compulsory above 500 GT).
+  - Never say the tools lack functionality — search_rules works but the tariff document
+    may simply not contain a specific exemption for that category.
 
 RESPONSE FORMAT:
 - Be concise and professional.
@@ -176,27 +180,39 @@ def aggregate_charges(charges_json: str) -> str:
     return _fn(charges_json)
 
 
-AGENT_TOOLS = [
-    _st(get_vessel_charge_plan),
-    _st(determine_applicable_charges),
-    _st(check_exemptions),
-    _st(get_tariff_table),
-    _st(list_available_charges),
-    _st(search_rules),
-    _st(register_vessel),
-    _st(classify_vessel_for_tariff),
-    _st(calculate_light_dues),
-    _st(calculate_vts),
-    _st(calculate_pilotage),
-    _st(calculate_tug_assistance),
-    _st(calculate_port_dues),
-    _st(calculate_cargo_dues),
-    _st(calculate_berth_dues),
-    _st(calculate_running_of_lines),
-    _st(aggregate_charges),
-]
+def _build_tools():
+    """Build tool list lazily — called once on first agent use."""
+    tools = [
+        _st(get_vessel_charge_plan),
+        _st(determine_applicable_charges),
+        _st(check_exemptions),
+        _st(get_tariff_table),
+        _st(list_available_charges),
+        _st(search_rules),
+        _st(register_vessel),
+        _st(classify_vessel_for_tariff),
+        _st(calculate_light_dues),
+        _st(calculate_vts),
+        _st(calculate_pilotage),
+        _st(calculate_tug_assistance),
+        _st(calculate_port_dues),
+        _st(calculate_cargo_dues),
+        _st(calculate_berth_dues),
+        _st(calculate_running_of_lines),
+        _st(aggregate_charges),
+    ]
+    return tools, {t.name: t for t in tools}
 
-TOOL_BY_NAME = {t.name: t for t in AGENT_TOOLS}
+
+_TOOLS: list | None = None
+_TOOL_BY_NAME: dict | None = None
+
+
+def _get_tools():
+    global _TOOLS, _TOOL_BY_NAME
+    if _TOOLS is None:
+        _TOOLS, _TOOL_BY_NAME = _build_tools()
+    return _TOOLS, _TOOL_BY_NAME
 
 
 # ── Agent class ───────────────────────────────────────────────────────────
@@ -209,12 +225,13 @@ class ChatAgent:
 
     def _get_llm(self):
         if self._llm is None:
+            tools, _ = _get_tools()
             base = ChatGoogleGenerativeAI(
                 model="models/gemini-2.5-flash-lite",
                 temperature=0,
                 google_api_key=config.GEMINI_API_KEY,
             )
-            self._llm = base.bind_tools(AGENT_TOOLS)
+            self._llm = base.bind_tools(tools)
         return self._llm
 
     @staticmethod
