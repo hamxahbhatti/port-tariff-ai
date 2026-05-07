@@ -1,8 +1,0 @@
-[phases.setup]
-nixPkgs = ["python313"]
-
-[phases.install]
-cmds = ["python3 -m pip install -r requirements-prod.txt"]
-
-[start]
-cmd = "python3 -m api.main"

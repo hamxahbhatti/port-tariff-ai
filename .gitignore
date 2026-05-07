@@ -1,4 +1,6 @@
 .env
+generate_doc.py
+nixpacks.toml
 __pycache__/
 *.pyc
 *.pyo
