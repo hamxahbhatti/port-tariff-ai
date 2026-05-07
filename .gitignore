@@ -5,8 +5,8 @@ __pycache__/
 *.pyc
 *.pyo
 .DS_Store
-data/chroma_db/
-# data/tariffs/ is intentionally tracked so Railway has the extracted rate tables
+# data/chroma_db/ and data/tariffs/ are intentionally tracked so Railway has
+# the pre-built vector store and extracted rate tables without needing ingestion
 *.pdf
 .venv/
 venv/
