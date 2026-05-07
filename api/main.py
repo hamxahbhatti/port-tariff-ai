@@ -515,6 +515,25 @@ def clear_session(session_id: str):
     return {"status": "cleared", "session_id": session_id}
 
 
+@app.get("/debug/chroma")
+def debug_chroma():
+    """Debug: check ChromaDB collection state."""
+    try:
+        from knowledge_store import vector_store
+        collection = vector_store._get_collection()
+        count = collection.count()
+        sample = vector_store.query("pilotage", port_name="durban", n_results=2)
+        return {
+            "chroma_dir": str(config.CHROMA_DIR),
+            "chroma_dir_exists": config.CHROMA_DIR.exists(),
+            "document_count": count,
+            "sample_results": len(sample),
+            "sample_texts": [r["text"][:100] for r in sample],
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+
 # ── Dev server ───────────────────────────────────────────────────────────────
 
 if __name__ == "__main__":
