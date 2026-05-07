@@ -2,7 +2,7 @@
 nixPkgs = ["python313"]
 
 [phases.install]
-cmds = ["pip install -r requirements-prod.txt"]
+cmds = ["python3 -m pip install -r requirements-prod.txt"]
 
 [start]
-cmd = "python -m api.main"
+cmd = "python3 -m api.main"
