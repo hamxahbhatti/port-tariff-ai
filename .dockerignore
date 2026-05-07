@@ -1,0 +1,10 @@
+.git
+.venv
+__pycache__
+*.pyc
+*.pyo
+.env
+data/chroma_db/
+tests/
+ingestion/
+.claude/
